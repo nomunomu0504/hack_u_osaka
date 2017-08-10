@@ -15,6 +15,7 @@
 		75E3EC251F3C77540089EB25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75E3EC231F3C77540089EB25 /* LaunchScreen.storyboard */; };
 		75E3EC301F3C77550089EB25 /* ARTwitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3EC2F1F3C77550089EB25 /* ARTwitterTests.swift */; };
 		75E3EC3B1F3C77550089EB25 /* ARTwitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3EC3A1F3C77550089EB25 /* ARTwitterUITests.swift */; };
+		75E3EC4D1F3C83460089EB25 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E3EC4C1F3C83460089EB25 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		75E3EC361F3C77550089EB25 /* ARTwitterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARTwitterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E3EC3A1F3C77550089EB25 /* ARTwitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTwitterUITests.swift; sourceTree = "<group>"; };
 		75E3EC3C1F3C77550089EB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75E3EC4C1F3C83460089EB25 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E3EC4D1F3C83460089EB25 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				75E3EC2E1F3C77550089EB25 /* ARTwitterTests */,
 				75E3EC391F3C77550089EB25 /* ARTwitterUITests */,
 				75E3EC151F3C77540089EB25 /* Products */,
+				75E3EC4B1F3C83460089EB25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +130,14 @@
 				75E3EC3C1F3C77550089EB25 /* Info.plist */,
 			);
 			path = ARTwitterUITests;
+			sourceTree = "<group>";
+		};
+		75E3EC4B1F3C83460089EB25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75E3EC4C1F3C83460089EB25 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,6 +531,7 @@
 				75E3EC411F3C77550089EB25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75E3EC421F3C77550089EB25 /* Build configuration list for PBXNativeTarget "ARTwitterTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +540,7 @@
 				75E3EC441F3C77550089EB25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75E3EC451F3C77550089EB25 /* Build configuration list for PBXNativeTarget "ARTwitterUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +549,7 @@
 				75E3EC471F3C77550089EB25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
