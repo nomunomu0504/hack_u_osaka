@@ -249,6 +249,7 @@
 				TargetAttributes = {
 					75E3EC131F3C77540089EB25 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 62ZE3Y948A;
 						ProvisioningStyle = Automatic;
 					};
 					75E3EC2A1F3C77550089EB25 = {
@@ -612,8 +613,9 @@
 			baseConfigurationReference = 82FE1E2E2C30BA36512B1B3A /* Pods-ARTwitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 62ZE3Y948A;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = arsjam.ARTwitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -626,8 +628,9 @@
 			baseConfigurationReference = 07C4EA0B7828EB0DDB1335C0 /* Pods-ARTwitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 62ZE3Y948A;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = arsjam.ARTwitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
