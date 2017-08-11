@@ -39,6 +39,12 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             self.nameLabel.text = "No current place"
             self.addressLabel.text = ""
             
+            print("place list")
+            print("\(String(describing: placeLikelihoodList!.likelihoods))")
+            
+            print("place list count")
+            print("\(String(describing: placeLikelihoodList!.likelihoods.count))")
+            
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 if let place = place {
