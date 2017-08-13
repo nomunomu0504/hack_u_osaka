@@ -70,6 +70,8 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
         let pinImage = UIImage(named: "pin")!
         let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        pinLocationNode = LocationAnnotationNode.action("action")
+        
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
         
         view.addSubview(sceneLocationView)
