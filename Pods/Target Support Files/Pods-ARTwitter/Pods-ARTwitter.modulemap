@@ -1,6 +1,0 @@
-framework module Pods_ARTwitter {
-  umbrella header "Pods-ARTwitter-umbrella.h"
-
-  export *
-  module * { export * }
-}
