@@ -70,9 +70,10 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
         let pinImage = UIImage(named: "pin")!
         let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-        pinLocationNode = LocationAnnotationNode.action("action")
+
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+       
         
         view.addSubview(sceneLocationView)
         
@@ -234,10 +235,23 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
                         sceneLocationView.moveSceneHeadingClockwise()
                     } else {
                         let image = UIImage(named: "pin")!
-                        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-                        annotationNode.scaleRelativeToDistance = true
-                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+//                        let annotationNode = LocationAnnotationNode(location: nil, image: image)
+//                        annotationNode.scaleRelativeToDistance = true
+//                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+                        
+                        let labelLocationNode = CreateLabelAR(location: nil, image: image)
+                        labelLocationNode.scaleRelativeToDistance = true
+                        
+                        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
+                        
+                        print("touch!!")
+                        
+
+                        
                     }
+                    
+                    
+                    
                 }
             }
         }
@@ -307,4 +321,44 @@ extension UIView {
         
         return recursiveSubviews
     }
+
 }
+
+//public extension LocationAnnotationNode {
+//
+//    class func createLabelNode(location: CLLocation?){
+//
+//
+//        // ボタンのサイズを定義.
+//        let bWidth: CGFloat = 200
+//        let bHeight: CGFloat = 50
+//        // 配置する座標を定義(画面の中心).
+////        let posX: CGFloat = self.view.bounds.width/2 - bWidth/2
+////        let posY: CGFloat = self.view.bounds.height/2 - bHeight/2
+//
+//        let arLabel = SCNText()
+//        arLabel.string = "hello"
+//        arLabel.font = UIFont.systemFont(ofSize: CGFloat(20))
+//        arLabel.containerFrame =  CGRect(x: 0, y: 0, width: bWidth, height: bHeight)
+//
+//        let annotationNode = SCNNode()
+//        annotationNode.geometry = arLabel
+//
+////        super.init(location: location)
+//
+////        self.location = location
+////        self.locationConfirmed = location != nil
+////
+////
+////        let billboardConstraint = SCNBillboardConstraint()
+////        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+////        constraints = [billboardConstraint]
+////
+////        addChildNode(annotationNode)
+//
+//
+//    }
+//
+//
+//}
+
