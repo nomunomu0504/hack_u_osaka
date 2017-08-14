@@ -84,7 +84,7 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
         
         
-        
+//ここから ---------------------
         // SCNText
         let text = SCNText()
         
@@ -148,7 +148,7 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         node.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1) //SCN Nodeのscaleを変更
         
         sceneLocationView.scene.rootNode.addChildNode(node)
-
+//ここまで ------------------  sncNode を使ったAR表示
         
         
         view.addSubview(sceneLocationView)
@@ -311,14 +311,14 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
                         sceneLocationView.moveSceneHeadingClockwise()
                     } else {
                         let image = UIImage(named: "pin")!
-//                        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-//                        annotationNode.scaleRelativeToDistance = true
-//                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+                        let annotationNode = CreateObjectAR(location: nil, image: image)
+                        annotationNode.scaleRelativeToDistance = true
+                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
                         
-                        let labelLocationNode = CreateLabelAR(location: nil, image: image)
-                        labelLocationNode.scaleRelativeToDistance = true
-                        
-                        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
+//                        let labelLocationNode = CreateLabelAR(location: nil, image: image)
+//                        labelLocationNode.scaleRelativeToDistance = true
+//
+//                        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
                         
                         print("touch!!")
                         

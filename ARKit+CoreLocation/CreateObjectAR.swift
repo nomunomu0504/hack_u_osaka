@@ -1,42 +1,42 @@
 //
-//  CreateLabelAR.swift
+//  CreateObjectAR.swift
 //  ARKit+CoreLocation
 //
-//  Created by みさきまさし on 2017/08/14.
+//  Created by みさきまさし on 2017/08/15.
 //  Copyright © 2017年 Project Dent. All rights reserved.
 //
 
 import Foundation
 import SceneKit
 import CoreLocation
-import UIKit
 
 
-
-open class CreateLabelAR: LocationNode {
+open class CreateObjectAR: LocationNode {
+    ///An image to use for the annotation
+    ///When viewed from a distance, the annotation will be seen at the size provided
+    ///e.g. if the size is 100x100px, the annotation will take up approx 100x100 points on screen.
+    public let image: UIImage
+    
+    ///Subnodes and adjustments should be applied to this subnode
+    ///Required to allow scaling at the same time as having a 2D 'billboard' appearance
+    public let annotationNode: SCNNode
+    public let annotationNode_text: SCNNode
 
     
     public let text: SCNText
     
-    public let node: SCNNode
-    
+    ///Whether the node should be scaled relative to its distance from the camera
+    ///Default value (false) scales it to visually appear at the same size no matter the distance
+    ///Setting to true causes annotation nodes to scale like a regular node
+    ///Scaling relative to distance may be useful with local navigation-based uses
+    ///For landmarks in the distance, the default is correct
     public var scaleRelativeToDistance = false
-    
-    
     
     public init(location: CLLocation?, image: UIImage) {
         
         
-        
-        
         // SCNText
         text = SCNText()
-        
-        //        text.containerFrame = CGRect(x: -0.5, y: -2, width: 2, height: 4) // 幅を決める
-        
-        //text.truncationMode = kCATruncationEnd
-        //text.alignmentMode = kCAAlignmentCenter
-        //text.font = UIFont(name: "Futura-Bold", size: 0.5)
         
         // NSAttributedString 設定
         let style = NSMutableParagraphStyle()
@@ -71,32 +71,22 @@ open class CreateLabelAR: LocationNode {
         
         text.chamferProfile = path
         
-        // マテリアル設定
-        
-        //        let m1 = SCNMaterial()
-        //        let m2 = SCNMaterial()
-        //        let m3 = SCNMaterial()
-        //
-        //        m1.diffuse.contents = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
-        //        m2.diffuse.contents = UIColor.red
-        //        m3.diffuse.contents = UIColor.yellow
-        //
-        //        text.materials = [m3,m2,m1,m2,m3]
-        
         text.firstMaterial!.diffuse.contents = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
         text.firstMaterial!.lightingModel = .constant
         
-        
-        
-        node = SCNNode(geometry: text)
-//        node.position = SCNVector3Zero
-        
-        
-        node.scale = SCNVector3(x: 10, y: 10, z: 10) //SCN Nodeのscaleを変更
 
+        annotationNode_text = SCNNode()
+        annotationNode_text.geometry = text
+        self.annotationNode_text.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
         
+        self.image = image
         
+        let plane = SCNPlane(width: image.size.width / 200, height: image.size.height / 200)
+        plane.firstMaterial!.diffuse.contents = image
+        plane.firstMaterial!.lightingModel = .constant
         
+        annotationNode = SCNNode()
+        annotationNode.geometry = plane
         
         super.init(location: location)
         
@@ -104,18 +94,11 @@ open class CreateLabelAR: LocationNode {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         constraints = [billboardConstraint]
         
-//        addChildNode(annotationNode)
-        
-        addChildNode(node)
-
-        
-
-
-        
+        addChildNode(annotationNode)
+        addChildNode(annotationNode_text)
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
