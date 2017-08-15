@@ -77,7 +77,7 @@ open class CreateObjectAR: LocationNode {
 
         annotationNode_text = SCNNode()
         annotationNode_text.geometry = text
-        self.annotationNode_text.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+        self.annotationNode_text.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1) //サイズ変更
         
         self.image = image
         
@@ -87,6 +87,9 @@ open class CreateObjectAR: LocationNode {
         
         annotationNode = SCNNode()
         annotationNode.geometry = plane
+        annotationNode.scale = SCNVector3(x: 1,y: 1, z: 1)
+        
+        annotationNode.name = "Hellow_World_annotationNode"
         
         super.init(location: location)
         
@@ -96,6 +99,9 @@ open class CreateObjectAR: LocationNode {
         
         addChildNode(annotationNode)
         addChildNode(annotationNode_text)
+        
+        
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {

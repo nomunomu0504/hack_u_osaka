@@ -65,18 +65,13 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
             sceneLocationView.showFeaturePoints = true
         }
         
-        //Currently set to Canary Wharf
-        let pinCoordinate = CLLocationCoordinate2D(latitude: 51.504607, longitude: -0.019592)
-        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-        let pinImage = UIImage(named: "pin")!
-        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        
 
         
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
        
-        let labelLocationNode = CreateLabelAR(location: nil, image: pinImage)
-        
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
+//        let labelLocationNode = CreateLabelAR(location: nil, image: pinImage)
+//
+//        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
         
         
         
@@ -147,8 +142,65 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
         node.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1) //SCN Nodeのscaleを変更
         
+        node.name = "Hello"
+        
         sceneLocationView.scene.rootNode.addChildNode(node)
 //ここまで ------------------  sncNode を使ったAR表示
+        
+        
+        
+        
+        
+//ここから ----------
+//        (latitude: 35.938256655652317, longitude: 136.18172222693536)
+
+        let labelCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let labelLocation = CLLocation(coordinate: labelCoordinate, altitude: 236)
+
+        
+        
+        let image = UIImage(named: "pin")!
+        let annotationNode = CreateObjectAR(location: labelLocation, image: image)
+        annotationNode.scaleRelativeToDistance = false
+        
+        
+        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+//ここまで ----------    locationNodeを使って文字とか色々表示
+        
+        
+        
+// ------------ ここから
+
+        //Currently set to Canary Wharf
+//        let pinCoordinate = CLLocationCoordinate2D(latitude: 51.504607, longitude: -0.019592)
+        let pinCoordinate = CLLocationCoordinate2D(latitude: 51, longitude: 0 )
+        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 100) //236
+        let pinImage = UIImage(named: "pin")!
+        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        
+        
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+        
+// ------------ ここまで pinの初期設定
+
+        
+// ------------ ここから
+        
+        //Currently set to Canary Wharf
+        //        let pinCoordinate = CLLocationCoordinate2D(latitude: 51.504607, longitude: -0.019592)
+        let pinCoordinate_sample = CLLocationCoordinate2D(latitude: 51, longitude: 150 )
+        let pinLocation_sample = CLLocation(coordinate: pinCoordinate_sample, altitude: 100) //236
+        let pinImage_sample = UIImage(named: "pin")!
+        let pinLocationNode_sample = LocationAnnotationNode(location: pinLocation_sample, image: pinImage_sample)
+        
+        
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode_sample)
+        
+// ------------ ここまで pinの初期設定
+
+        
+        
+        
         
         
         view.addSubview(sceneLocationView)
@@ -294,6 +346,35 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
+        
+        
+        
+        
+//        if let touch2 = touches.first{
+//
+//
+//            let p = touch2.location(in: self.sceneLocationView)
+//
+//
+//            let hits = self.sceneLocationView.hitTest(p, options: nil)
+//            if let tappedNode = hits.first?.node {
+//                // do something with the tapped node ...
+//                print("\(tappedNode.name)")
+//            }
+//
+//        }
+//
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         if let touch = touches.first {
             if touch.view != nil {
                 if (mapView == touch.view! ||
@@ -310,27 +391,41 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
                         print("right side of the screen")
                         sceneLocationView.moveSceneHeadingClockwise()
                     } else {
-                        let image = UIImage(named: "pin")!
-                        let annotationNode = CreateObjectAR(location: nil, image: image)
-                        annotationNode.scaleRelativeToDistance = true
-                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
                         
+                        let labelCoordinate = CLLocationCoordinate2D(latitude: 51.504607, longitude: -0.019592)
+                        let labelLocation = CLLocation(coordinate: labelCoordinate, altitude: 236)
+                        
+                        let image = UIImage(named: "pin")!
+//                        let annotationNode = CreateObjectAR(location: labelLocation, image: image)
+                        let annotationNode = CreateSampleObjectAR(location: labelLocation, image: image)
+                        annotationNode.scaleRelativeToDistance = true
+
+                        
+                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+
 //                        let labelLocationNode = CreateLabelAR(location: nil, image: image)
 //                        labelLocationNode.scaleRelativeToDistance = true
 //
 //                        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
                         
                         print("touch!!")
+                        let hits = sceneLocationView.hitTest(location, options: nil)
                         
-
-                        
+                        if let tappedNode = hits.first?.node {
+                            // do something with the tapped node ...
+                            if tappedNode.name != nil {
+                                print(tappedNode.name!)
+                            } else {
+                                print("\nerrro: tapped node name is nul\n")
+                            }
+                            
+                        }
                     }
-                    
-                    
-                    
                 }
             }
+            
         }
+        
     }
     
     //MARK: MKMapViewDelegate
