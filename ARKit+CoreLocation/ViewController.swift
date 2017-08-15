@@ -188,11 +188,12 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
         //Currently set to Canary Wharf
         //        let pinCoordinate = CLLocationCoordinate2D(latitude: 51.504607, longitude: -0.019592)
-        let pinCoordinate_sample = CLLocationCoordinate2D(latitude: 51, longitude: 150 )
+        let pinCoordinate_sample = CLLocationCoordinate2D(latitude: 36, longitude: 136 ) //150
         let pinLocation_sample = CLLocation(coordinate: pinCoordinate_sample, altitude: 100) //236
         let pinImage_sample = UIImage(named: "pin")!
-        let pinLocationNode_sample = LocationAnnotationNode(location: pinLocation_sample, image: pinImage_sample)
+        let pinLocationNode_sample = CreateSampleObjectAR(location: pinLocation_sample, image: pinImage_sample)
         
+        pinLocationNode_sample.scaleRelativeToDistance = false
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode_sample)
         
@@ -224,7 +225,7 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DDLogDebug("run")
-        sceneLocationView.run()
+        sceneLocationView.run() //ここでlcation view のnodeのサイズとか色々変更している
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -494,6 +495,10 @@ extension UIView {
     }
 
 }
+
+
+
+
 
 
 

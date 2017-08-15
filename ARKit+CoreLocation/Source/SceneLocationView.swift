@@ -135,6 +135,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         session.pause()
         updateEstimatesTimer?.invalidate()
         updateEstimatesTimer = nil
+        
     }
     
     @objc private func updateLocationData() {
@@ -277,6 +278,9 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         }
         
         updatePositionAndScaleOfLocationNode(locationNode: locationNode, initialSetup: true, animated: false)
+        
+
+        
         
         locationNodes.append(locationNode)
         sceneNode?.addChildNode(locationNode)
@@ -426,6 +430,38 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
             
             annotationNode.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
         }
+        
+        
+        // 追加
+        if let annotationNode2 = locationNode as? CreateSampleObjectAR  {
+            //The scale of a node with a billboard constraint applied is ignored
+            //The annotation subnode itself, as a subnode, has the scale applied to it
+            let appliedScale = locationNode.scale
+            locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
+            
+            var scale: Float
+            
+            if annotationNode2.scaleRelativeToDistance {
+                scale = appliedScale.y
+                annotationNode2.annotationNode.scale = appliedScale
+                annotationNode2.annotationNode_text.scale = appliedScale
+            } else {
+                //Scale it to be an appropriate size so that it can be seen
+                scale = Float(adjustedDistance) * 0.181
+                
+                if distance > 3000 {
+                    scale = scale * 0.75
+                }
+                
+                annotationNode2.annotationNode.scale = SCNVector3(x: scale, y: scale, z: scale)
+                annotationNode2.annotationNode_text.scale = SCNVector3(x: scale, y: scale, z: scale)
+            }
+            
+            annotationNode2.pivot = SCNMatrix4MakeTranslation(0, -1.1 * scale, 0)
+        }
+
+        
+        
         
         SCNTransaction.commit()
         
