@@ -93,7 +93,7 @@ open class CreateSampleObjectAR: LocationNode {
         annotationNode = SCNNode()
         annotationNode.geometry = plane
         
-        annotationNode.name = "Sample"
+        annotationNode.name = "Sample" //nodeにつける名前を指定
         
         super.init(location: location)
         

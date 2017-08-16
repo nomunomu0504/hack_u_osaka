@@ -197,7 +197,7 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode_sample)
         
-// ------------ ここまで pinの初期設定
+// ------------ ここまで pinの初期設定 AR上に　テキストと画像を表示
 
         
         
@@ -410,6 +410,8 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
 //                        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: labelLocationNode)
                         
                         print("touch!!")
+                        
+                        // ここで何のnodeをタップしたのか判定
                         let hits = sceneLocationView.hitTest(location, options: nil)
                         
                         if let tappedNode = hits.first?.node {
