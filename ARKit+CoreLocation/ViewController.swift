@@ -398,9 +398,10 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
                         
                         let image = UIImage(named: "pin")!
 //                        let annotationNode = CreateObjectAR(location: labelLocation, image: image)
-                        let annotationNode = CreateSampleObjectAR(location: labelLocation, image: image)
+                        let annotationNode = CreateSampleObjectAR(location: labelLocation, image: image, NodeName: "TappedNode", NodeText: "Tapped!!")
                         annotationNode.scaleRelativeToDistance = true
 
+                        
                         
                         sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
 

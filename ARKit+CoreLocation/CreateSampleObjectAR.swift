@@ -25,6 +25,9 @@ open class CreateSampleObjectAR: LocationNode {
     
     
     public let text: SCNText
+    
+    public var StringText: String = "Hello"
+    public var StringName: String = "SAmpleObjectAR"
 
     
     ///Whether the node should be scaled relative to its distance from the camera
@@ -34,7 +37,7 @@ open class CreateSampleObjectAR: LocationNode {
     ///For landmarks in the distance, the default is correct
     public var scaleRelativeToDistance = false
     
-    public init(location: CLLocation?, image: UIImage) {
+    public init(location: CLLocation?, image: UIImage, NodeName: String = "SampleObjectAR", NodeText: String = "Hello") {
         
         
         // SCNText
@@ -46,8 +49,10 @@ open class CreateSampleObjectAR: LocationNode {
         
         let textFont:UIFont = UIFont(name: "Futura-Bold", size: 0.5)!
         
+        StringText = NodeText
+        StringName = NodeName
         
-        text.string = NSAttributedString(string: "Hello World!!!", attributes:
+        text.string = NSAttributedString(string: StringText, attributes:
             [NSAttributedStringKey.paragraphStyle: style,
              NSAttributedStringKey.font: textFont]
         )
@@ -93,7 +98,7 @@ open class CreateSampleObjectAR: LocationNode {
         annotationNode = SCNNode()
         annotationNode.geometry = plane
         
-        annotationNode.name = "Sample" //nodeにつける名前を指定
+        annotationNode.name = StringName //nodeにつける名前を指定
         
         super.init(location: location)
         
