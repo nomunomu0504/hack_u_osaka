@@ -8,6 +8,7 @@
 
 import UIKit
 import TwitterKit
+import Foundation
 
 class TimeLineView: TWTRTimelineViewController {
     public var userId: String?
@@ -25,4 +26,68 @@ class TimeLineView: TWTRTimelineViewController {
 
     }
     
+}
+
+class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    var tableView: UITableView!
+    var tweets: [TWTRTweet] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    var prototypeCell: TWTRTweetTableViewCell?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView = UITableView(frame: self.view.bounds)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        prototypeCell = TWTRTweetTableViewCell(style: .default, reuseIdentifier: "cell")
+        
+        tableView.register(TWTRTweetTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(tableView)
+        
+        loadTweets()
+    }
+    
+    func loadTweets() {
+        Twitter.getHomeTimeline({
+            twttrs in
+            for tweet in twttrs {
+                self.tweets.append(tweet)
+            }
+        }, error: {
+            error in
+            print("" (error.localizedDescription))
+        })
+    }
+    
+    // MARK: UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of Tweets.
+        return tweets.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TWTRTweetTableViewCell
+        
+        let tweet = tweets[indexPath.row]
+        cell.configure(with: tweet)
+        
+        return cell
+    }
+    
+    // MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let tweet = tweets[indexPath.row]
+        
+        prototypeCell?.configure(with: tweet)
+        
+        if let height = prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {
+            return height
+        } else {
+            return tableView.estimatedRowHeight
+        }
+    }
 }
