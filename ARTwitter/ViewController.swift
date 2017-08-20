@@ -22,12 +22,12 @@ class ViewController: UIViewController {
                 
                 //                self.showSingleTweet()
                 //                self.actionForRestAPI()
-                //                self.searchUser()
+                                self.searchUser()
                 //                self.displayUser()
                 
                 //                self.presentViewTimeLine(userId: "723513731930443776")
                 
-                self.segueToSecondViewController(userId: "723513731930443776")
+                self.segueToSecondViewController(userId: "899105546648797184")
                 
             } else {
                 print("error: \(error!.localizedDescription)");
