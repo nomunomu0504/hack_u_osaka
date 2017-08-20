@@ -37,6 +37,10 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
     
     var adjustNorthByTappingSidesOfScreen = false
     
+    
+    var node : SCNNode!
+    var text : SCNText!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,7 +85,7 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
 //ここから ---------------------
         // SCNText
-        let text = SCNText()
+        text = SCNText()
         
         //        text.containerFrame = CGRect(x: -0.5, y: -2, width: 2, height: 4) // 幅を決める
         
@@ -136,8 +140,9 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
         text.firstMaterial!.diffuse.contents = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
         
-        let node = SCNNode(geometry: text)
+        node = SCNNode(geometry: text)
         node.position = SCNVector3Zero
+        node.position = SCNVector3Make(0, 0.3, 0)
         
         
         node.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1) //SCN Nodeのscaleを変更
@@ -145,6 +150,39 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         node.name = "Hello"
         
         sceneLocationView.scene.rootNode.addChildNode(node)
+        
+        
+        let url = Bundle.main.url(forResource: "art.scnassets/animation2/anim", withExtension: "dae")!
+        let modelScene: SCNScene
+        do {
+            modelScene = try SCNScene(url: url, options: nil)
+        } catch {
+            fatalError()
+        }
+        
+        let modelNode = SCNNode()
+        for childNode in modelScene.rootNode.childNodes {
+            //childNode.position = SCNVector3Zero
+            childNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+            childNode.name = "MMD_model"
+            modelNode.addChildNode(childNode)
+        }
+        
+        modelNode.scale = SCNVector3(x: 2, y: 2, z: 2)
+        
+        modelNode.position = SCNVector3Make(0, -0.5, -0.2)
+        modelNode.name = "MMD_Model"
+        
+        sceneLocationView.scene.rootNode.addChildNode(modelNode)
+        
+        
+        
+        
+//        let yukari = sceneLocationView.scene.rootNode.childNode(withName: "結月ゆかり_純_mesh", recursively: true)!
+        
+        
+        
+        
 //ここまで ------------------  sncNode を使ったAR表示
         
         
@@ -418,6 +456,22 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
                         if let tappedNode = hits.first?.node {
                             // do something with the tapped node ...
                             if tappedNode.name != nil {
+                                
+                                
+                                let style = NSMutableParagraphStyle()
+                                style.lineSpacing = -0.5
+                                
+                                let textFont:UIFont = UIFont(name: "Futura-Bold", size: 0.5)!
+                                
+                                var node_text = tappedNode.name
+                                
+                                text.string = NSAttributedString(string: "Tapped \n \(node_text!)", attributes:
+                                    [NSAttributedStringKey.paragraphStyle: style,
+                                     NSAttributedStringKey.font: textFont]
+                                )
+                                
+                                
+                                
                                 print(tappedNode.name!)
                             } else {
                                 print("\nerrro: tapped node name is nul\n")

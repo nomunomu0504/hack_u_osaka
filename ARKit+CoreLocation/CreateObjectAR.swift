@@ -35,6 +35,8 @@ open class CreateObjectAR: LocationNode {
     public init(location: CLLocation?, image: UIImage) {
         
         
+        
+        
         // SCNText
         text = SCNText()
         

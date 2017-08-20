@@ -40,6 +40,12 @@ open class CreateSampleObjectAR: LocationNode {
     public init(location: CLLocation?, image: UIImage, NodeName: String = "SampleObjectAR", NodeText: String = "Hello") {
         
         
+        
+        
+        
+        
+        
+        
         // SCNText
         text = SCNText()
         
@@ -108,6 +114,7 @@ open class CreateSampleObjectAR: LocationNode {
         
         addChildNode(annotationNode)
         addChildNode(annotationNode_text)
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
