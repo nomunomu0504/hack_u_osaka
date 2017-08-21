@@ -26,7 +26,11 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     
     var nowAngle:Double = 0
     
+    var DataArray = Array<Array<Any>>()
     
+    var data_GMSPlaceLikelihood = Array<GMSPlaceLikelihood>()
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,14 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         
         
         placesClient = GMSPlacesClient.shared()
+        
+        
+        var names = [[1],[5],[3],[2]]
+    
+//        var reversedNames = names.sorted(by: { &s1[0], &s2[0] in &s1[0] > &s2[0] } )
+        var reversedNames = names.sorted(by: { $0[0] > $1[0] } )
+        
+        print("sorted \(reversedNames)")
     }
     
     // Add a UIButton in Interface Builder, and connect the action to this function.
@@ -54,6 +66,12 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             print("place list count")
             print("\(String(describing: placeLikelihoodList!.likelihoods.count))")
             
+            
+            self.data_GMSPlaceLikelihood = placeLikelihoodList!.likelihoods
+            
+            
+            
+            
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 
@@ -68,8 +86,12 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
                     print("longitude \(Double(place.coordinate.longitude))")
                     
                     self.google_load_flag = true
-                    self.latitude = Double(place.coordinate.latitude)
-                    self.longitude = Double(place.coordinate.longitude)
+                    
+                    
+//                    self.latitude = Double(place.coordinate.latitude)
+//                    self.longitude = Double(place.coordinate.longitude)
+                    
+                    
                     
                     
                     self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
@@ -81,7 +103,69 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     
     
     
+    
+    
+    
+    func appendDistance(loadData:[GMSPlaceLikelihood]) {
+        
+        var i = 0
+        for element in loadData{
+            
+            
+            print(element.place.name)
+            
+            
+            
+            var coordinate_distance = distance(a:  Point(x: self.latitude, y: self.longitude),
+                                      b: Point(x: Double(element.place.coordinate.latitude),
+                                               y: Double(element.place.coordinate.longitude)))
+            
+            print("distance")
+            print(coordinate_distance)
+            
+            self.DataArray.append([element.place.name,
+                                 Double(element.place.coordinate.longitude), Double(element.place.coordinate.latitude), Double(element.place.coordinate.longitude) ])
+            
+            i += 1
+            
+        }
+        
+        print("DataArray :")
+        
+//        print(self.DataArray.sorted(by: { $0[1] as? Double > $1[1] as? Double } ))
+        
+        self.DataArray = self.bubblesor2(&DataArray)
+        
 
+        
+    
+    }
+    
+    
+    
+    
+    func bubblesor2(_ a:inout Array<Array<Any>>) -> Array<Array<Any>>{
+        
+        for j in (0...a.count - 1){
+            
+            print(a.count - j - 1)
+            
+            for i in (0..<a.count - j - 1){
+                
+                if Double(a[i][1] as! Double) > Double(a[i + 1][1] as! Double){
+                    swap(&a[i], &a[i + 1])
+                }
+                
+            }
+            
+        }
+        
+        return a
+        
+    }
+    
+    
+    
     
     
     @IBOutlet weak var latLabel: UILabel!
@@ -122,7 +206,7 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         if self.google_load_flag == true {
             
             print("location latitude: \(Double(locationData!.coordinate.latitude)) location longitude: \(Double(locationData!.coordinate.longitude))")
-            print("latitude: \(self.latitude) longitude: \(self.longitude)")
+//            print("latitude: \(self.latitude) longitude: \(self.longitude)")
             
             //35.9304939,136.1857218,15 サンドーム
             
@@ -130,8 +214,20 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
 //                        b: Point(x: self.latitude, y: self.longitude)))
             
             
-            let angle_:Double = angle(a:Point(x: Double(locationData!.coordinate.latitude), y: Double(locationData!.coordinate.longitude)),
-                              b: Point(x: self.latitude, y: self.longitude))
+            
+            self.latitude = Double(locationData!.coordinate.latitude)
+            
+            self.longitude = Double(locationData!.coordinate.longitude)
+            
+            
+            self.appendDistance(loadData: self.data_GMSPlaceLikelihood)
+
+            
+            
+            let angle_:Double = angle(a: Point(x: self.latitude, y: self.longitude),
+                                      b: Point(x: Double(self.DataArray[0][2] as! Double),
+                                               y: Double(self.DataArray[0][3] as! Double)) //ここを変更
+            )
             
             
             print(String(angle_))
@@ -223,6 +319,15 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     }
     
     
+    
+    
+    func distance(a:Point, b:Point) -> Double {
+        return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2))
+    }
+    
+    
+    
+    
     func AngularDeviation(angle1:Double,angle2:Double) -> Double{
         
         
@@ -242,6 +347,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         }
         
     }
+    
+
+    
 
     
     
