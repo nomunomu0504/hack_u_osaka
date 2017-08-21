@@ -49,13 +49,14 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             self.addressLabel.text = ""
             
             print("place list")
-            print("\(String(describing: placeLikelihoodList!.likelihoods))")
+            print("\(String(describing: placeLikelihoodList!.likelihoods[1]))")
             
             print("place list count")
             print("\(String(describing: placeLikelihoodList!.likelihoods.count))")
             
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
+                
                 
                 
                 
