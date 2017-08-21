@@ -19,6 +19,15 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
     
+    var google_load_flag = false
+    
+    var longitude:Double = 0
+    var latitude :Double = 0
+    
+    var nowAngle:Double = 0
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,8 +56,21 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
+                
+                
+                
                 if let place = place {
                     self.nameLabel.text = place.name
+                    print("cordinate2D")
+                    print(place.coordinate)
+                    
+                    print("longitude \(Double(place.coordinate.longitude))")
+                    
+                    self.google_load_flag = true
+                    self.latitude = Double(place.coordinate.latitude)
+                    self.longitude = Double(place.coordinate.longitude)
+                    
+                    
                     self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
                         .joined(separator: "\n")
                 }
@@ -94,6 +116,33 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         }
         if let alt = locationData?.altitude {
             altLabel.text = String(format:"%.6f",alt)
+        }
+        
+        if self.google_load_flag == true {
+            
+            print("location latitude: \(Double(locationData!.coordinate.latitude)) location longitude: \(Double(locationData!.coordinate.longitude))")
+            print("latitude: \(self.latitude) longitude: \(self.longitude)")
+            
+            //35.9304939,136.1857218,15 サンドーム
+            
+//            print(angle(a:Point(x: Double(locationData!.coordinate.latitude), y: Double(locationData!.coordinate.longitude)),
+//                        b: Point(x: self.latitude, y: self.longitude)))
+            
+            
+            let angle_:Double = angle(a:Point(x: Double(locationData!.coordinate.latitude), y: Double(locationData!.coordinate.longitude)),
+                              b: Point(x: self.latitude, y: self.longitude))
+            
+            
+            print(String(angle_))
+            
+            if AngularDeviation(angle1: self.nowAngle, angle2: angle_) < 20 {
+                
+                print("Detect Place!!")
+                
+            }
+            
+            
+            
         }
     }
     
@@ -151,7 +200,49 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         
         dirLabel.text = String(format:"%.6f",northDir)
         
+        self.nowAngle = northDir
+
+        
+    }
+    
+    
+    struct Point {
+        var x:Double = 0
+        var y:Double = 0
+    }
+    
+    func angle(a:Point, b:Point) -> Double {
+        var r = atan2(b.y - a.y, b.x - a.x)
+        print("r = ")
+        print(r)
+        if r < 0 {
+            r = r + 2 * M_PI
+        }
+        return floor(r * 360 / (2 * M_PI))
+    }
+    
+    
+    func AngularDeviation(angle1:Double,angle2:Double) -> Double{
+        
+        
+        let deviation1 = fabs(angle1 - angle2)
+        
+        let deviation2 = fabs(angle1 + (360 - angle2))
+        
+        if deviation1 > deviation2{
+            
+            return deviation2
+        }else if deviation2 > deviation1 {
+            
+            return deviation1
+        }else {
+            
+            return deviation1
+        }
+        
     }
 
+    
+    
 }
 
