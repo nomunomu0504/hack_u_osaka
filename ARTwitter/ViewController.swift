@@ -30,6 +30,9 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     
     var data_GMSPlaceLikelihood = Array<GMSPlaceLikelihood>()
     
+    
+    var alertFlag = false
+    
 
     
     override func viewDidLoad() {
@@ -60,8 +63,8 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             self.nameLabel.text = "No current place"
             self.addressLabel.text = ""
             
-            print("place list")
-            print("\(String(describing: placeLikelihoodList!.likelihoods[1]))")
+//            print("place list")
+//            print("\(String(describing: placeLikelihoodList!.likelihoods[1]))")
             
             print("place list count")
             print("\(String(describing: placeLikelihoodList!.likelihoods.count))")
@@ -69,100 +72,57 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             
             self.data_GMSPlaceLikelihood = placeLikelihoodList!.likelihoods
             
-            
+            self.appendDistance(loadData: self.data_GMSPlaceLikelihood)
+
             
             
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 
+                self.google_load_flag = true
                 
                 
-                
-                if let place = place {
-                    self.nameLabel.text = place.name
-                    print("cordinate2D")
-                    print(place.coordinate)
-                    
-                    print("longitude \(Double(place.coordinate.longitude))")
-                    
-                    self.google_load_flag = true
-                    
-                    
-//                    self.latitude = Double(place.coordinate.latitude)
-//                    self.longitude = Double(place.coordinate.longitude)
-                    
-                    
-                    
-                    
-                    self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
-                        .joined(separator: "\n")
-                }
+//                if let place = place {
+//                    self.nameLabel.text = place.name
+//                    print("cordinate2D")
+//                    print(place.coordinate)
+//
+//                    print("longitude \(Double(place.coordinate.longitude))")
+//
+//
+//
+//
+////                    self.latitude = Double(place.coordinate.latitude)
+////                    self.longitude = Double(place.coordinate.longitude)
+//
+//
+//                }
             }
         })
     }
     
     
     
+    @IBAction func Next(_ sender: Any) {
     
+        
+        // 次の遷移先のViewControllerインスタンスを生成する
+        let vc = CameraViewContoller()
+        
+        // presentViewControllerメソッドで遷移する
+        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+        self.present(vc, animated: true, completion: nil) //swift4
+        
+//      self.presentViewController(vc, animated: true, completion: nil) //swift3
     
-    
-    func appendDistance(loadData:[GMSPlaceLikelihood]) {
-        
-        var i = 0
-        for element in loadData{
-            
-            
-            print(element.place.name)
-            
-            
-            
-            var coordinate_distance = distance(a:  Point(x: self.latitude, y: self.longitude),
-                                      b: Point(x: Double(element.place.coordinate.latitude),
-                                               y: Double(element.place.coordinate.longitude)))
-            
-            print("distance")
-            print(coordinate_distance)
-            
-            self.DataArray.append([element.place.name,
-                                 Double(element.place.coordinate.longitude), Double(element.place.coordinate.latitude), Double(element.place.coordinate.longitude) ])
-            
-            i += 1
-            
-        }
-        
-        print("DataArray :")
-        
-//        print(self.DataArray.sorted(by: { $0[1] as? Double > $1[1] as? Double } ))
-        
-        self.DataArray = self.bubblesor2(&DataArray)
-        
-
-        
     
     }
     
     
     
     
-    func bubblesor2(_ a:inout Array<Array<Any>>) -> Array<Array<Any>>{
-        
-        for j in (0...a.count - 1){
-            
-            print(a.count - j - 1)
-            
-            for i in (0..<a.count - j - 1){
-                
-                if Double(a[i][1] as! Double) > Double(a[i + 1][1] as! Double){
-                    swap(&a[i], &a[i + 1])
-                }
-                
-            }
-            
-        }
-        
-        return a
-        
-    }
+    
+    
     
     
     
@@ -191,6 +151,14 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
         lm.stopUpdatingHeading()
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
         let locationData = locations.last
         if let lng = locationData?.coordinate.longitude {
@@ -215,12 +183,18 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             
             
             
-            self.latitude = Double(locationData!.coordinate.latitude)
+            self.latitude = Double(locationData!.coordinate.latitude) //現在の位置
             
-            self.longitude = Double(locationData!.coordinate.longitude)
+            self.longitude = Double(locationData!.coordinate.longitude) //現在の位置
             
             
             self.appendDistance(loadData: self.data_GMSPlaceLikelihood)
+            
+            
+//            self.addressLabel.text = place.formattedAddress?.components(separatedBy: ", ")
+//                .joined(separator: "\n")
+            
+            
 
             
             
@@ -230,17 +204,49 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             )
             
             
+            self.nameLabel.text = self.DataArray[0][0] as! String
+            
+            print("angle")
             print(String(angle_))
             
             if AngularDeviation(angle1: self.nowAngle, angle2: angle_) < 20 {
                 
                 print("Detect Place!!")
                 
+                showalert()
+                
             }
             
             
             
         }
+    }
+    
+    
+    
+    
+    func showalert(){
+        
+        
+        if alertFlag == true{
+            // UIAlertControllerを作成する.
+            let myAlert: UIAlertController = UIAlertController(title: "タイトル", message: "メッセージ", preferredStyle: .alert)
+        
+            alertFlag = false
+            // OKのアクションを作成する.
+            let myOkAction = UIAlertAction(title: "OK", style: .default) { action in
+                print("Action OK!!")
+                self.alertFlag = true
+                
+            }
+        
+            // OKのActionを追加する.
+            myAlert.addAction(myOkAction)
+        
+            // UIAlertを発動する.
+            present(myAlert, animated: true, completion: nil)
+        }
+        
     }
     
     
@@ -310,8 +316,6 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
     
     func angle(a:Point, b:Point) -> Double {
         var r = atan2(b.y - a.y, b.x - a.x)
-        print("r = ")
-        print(r)
         if r < 0 {
             r = r + 2 * M_PI
         }
@@ -345,6 +349,69 @@ class ViewController: UIViewController,  CLLocationManagerDelegate  {
             
             return deviation1
         }
+        
+    }
+    
+
+    
+    
+    func appendDistance(loadData:[GMSPlaceLikelihood]) {
+        
+        var i = 0
+        
+        DataArray = Array<Array<Any>>()
+        
+        for element in loadData{
+            
+            
+            print(element.place.name)
+            
+            
+            
+            var coordinate_distance = distance(a:  Point(x: self.latitude, y: self.longitude),
+                                               b: Point(x: Double(element.place.coordinate.latitude),
+                                                        y: Double(element.place.coordinate.longitude)))
+            
+            print("distance")
+            print(coordinate_distance)
+            
+            self.DataArray.append([element.place.name,
+                                   Double(coordinate_distance), Double(element.place.coordinate.latitude), Double(element.place.coordinate.longitude) ])
+            
+            i += 1
+            
+        }
+        
+        
+        //        print(self.DataArray.sorted(by: { $0[1] as? Double > $1[1] as? Double } ))
+        
+        self.DataArray = self.bubblesor2(&DataArray)
+        print("DataArray :")
+        print(self.DataArray)
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    func bubblesor2(_ a:inout Array<Array<Any>>) -> Array<Array<Any>>{
+        
+        for j in (0...a.count - 1){
+            
+            for i in (0..<a.count - j - 1){
+                
+                if Double(a[i][1] as! Double) > Double(a[i + 1][1] as! Double){
+                    swap(&a[i], &a[i + 1])
+                }
+                
+            }
+            
+        }
+        
+        return a
         
     }
     

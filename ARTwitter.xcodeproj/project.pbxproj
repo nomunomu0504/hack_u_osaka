@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		221727B9EE4BDA0C6BEC52CC /* Pods_ARTwitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B9FCA247EE551E9F3B20904 /* Pods_ARTwitter.framework */; };
 		4D0C5E01A71925EA61FEB902 /* Pods_ARTwitterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B548BFF3DE024151725F0FB8 /* Pods_ARTwitterTests.framework */; };
+		75AAED2A1F4BAD8400708CE7 /* CameraViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AAED291F4BAD8300708CE7 /* CameraViewcontroller.swift */; };
 		75E3EC181F3C77540089EB25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3EC171F3C77540089EB25 /* AppDelegate.swift */; };
 		75E3EC1A1F3C77540089EB25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3EC191F3C77540089EB25 /* ViewController.swift */; };
 		75E3EC1D1F3C77540089EB25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75E3EC1B1F3C77540089EB25 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		07C4EA0B7828EB0DDB1335C0 /* Pods-ARTwitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTwitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARTwitter/Pods-ARTwitter.release.xcconfig"; sourceTree = "<group>"; };
 		4B9FCA247EE551E9F3B20904 /* Pods_ARTwitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARTwitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D274AD2C233197279163F77 /* Pods-ARTwitterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTwitterUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARTwitterUITests/Pods-ARTwitterUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		75AAED291F4BAD8300708CE7 /* CameraViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewcontroller.swift; sourceTree = "<group>"; };
 		75E3EC141F3C77540089EB25 /* ARTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E3EC171F3C77540089EB25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75E3EC191F3C77540089EB25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				75E3EC171F3C77540089EB25 /* AppDelegate.swift */,
 				75E3EC191F3C77540089EB25 /* ViewController.swift */,
+				75AAED291F4BAD8300708CE7 /* CameraViewcontroller.swift */,
 				75E3EC1B1F3C77540089EB25 /* Main.storyboard */,
 				75E3EC211F3C77540089EB25 /* Assets.xcassets */,
 				75E3EC231F3C77540089EB25 /* LaunchScreen.storyboard */,
@@ -457,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E3EC201F3C77540089EB25 /* ARTwitter.xcdatamodeld in Sources */,
+				75AAED2A1F4BAD8400708CE7 /* CameraViewcontroller.swift in Sources */,
 				75E3EC1A1F3C77540089EB25 /* ViewController.swift in Sources */,
 				75E3EC181F3C77540089EB25 /* AppDelegate.swift in Sources */,
 			);
