@@ -21,11 +21,13 @@ class TimeLineView: TWTRTimelineViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        //福野泰介 taisukef
         
         Twitter.sharedInstance().logIn { session, error in
             if (session != nil) {
                 // ユーザ名からタイムラインを取得
+                print("userName=")
+                print(self.userName)
                 self.dataSource = TWTRUserTimelineDataSource(screenName: self.userName, apiClient: self.client)
             } else {
                 print("error: \(error!.localizedDescription)")

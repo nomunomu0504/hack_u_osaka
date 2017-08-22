@@ -26,18 +26,14 @@ class ViewController: UIViewController {
                 
                 //                self.showSingleTweet()
                 //                self.actionForRestAPI()
-                                self.searchUser()
+                
                 //                self.displayUser()
                 
                 //                self.presentViewTimeLine(userId: "723513731930443776")
                 
-                // 次の遷移先のViewControllerインスタンスを生成する
-                let vc = TimeLineView()
+                var send_name = self.searchUser(USERNAME:"hanaDojo") //ここでアカウント検索
                 
-                vc.userName = session!.userName
-                // presentViewControllerメソッドで遷移する
-                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-                self.present(vc, animated: true, completion: nil)
+                
                 
             } else {
                 print("error: \(error!.localizedDescription)");
@@ -107,33 +103,86 @@ class ViewController: UIViewController {
     
     var twitterAccount = ACAccount()
     
-    func searchUser(){
+    
+    
+    func searchUser(USERNAME: String) -> String{
         
         
-//        let client = TWTRAPIClient()
-//        let statusesShowEndpoint = "https://api.twitter.com/1.1/users/search.json"
-//        let params = ["q": "misaki masashi"]
-//        var clientError : NSError?
-//        
-//        let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
-//        
-//        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-//            if connectionError != nil {
-//                print("Error: \(connectionError!)")
-//            }
-//            
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: data!) as! [Any]
-//                
-//                print("search userName : ")
-//                print(String(json["name"] as! String))
-//                
-////                let obå
-//            } catch let jsonError as NSError {
-//                print("json error: \(jsonError.localizedDescription)")
-//            }
-//        }
-//        
+        let client = TWTRAPIClient()
+        let statusesShowEndpoint = "https://api.twitter.com/1.1/users/search.json"
+        let params = ["q": USERNAME]
+        var clientError : NSError?
+        var return_name = String()
+        
+        
+        let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
+        
+        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+            if connectionError != nil {
+                print("Error: \(connectionError!)")
+            }
+            
+            do {
+
+                
+                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [[String:Any]]
+                
+                
+                print("json = ")
+                print(json)
+//                print(json[0]["name"]!)
+                
+                if let username_geted = json[0]["screen_name"] as? String{
+                    print("json =")
+                    print(username_geted)
+                    return_name = username_geted
+                    
+                    
+                    print("send_name =")
+                    print(return_name)
+                    
+                    // 次の遷移先のViewControllerインスタンスを生成する
+                    let vc = TimeLineView()
+                    
+                    vc.userName = return_name
+                    // presentViewControllerメソッドで遷移する
+                    // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                    self.present(vc, animated: true, completion: nil)
+
+                    
+                }else{
+                    print("error")
+                    
+                    return_name = "error"
+                    
+                }
+                
+//                for obj in json {
+//                    //screen_name
+//                    if let user = obj["name"] as? [String:Any] {
+//                        let screen_name = user["screen_name"] ?? "(empty)"
+//                        print("screen_name =", screen_name)
+//                    } else {
+//                        print("does not exist 'user'")
+//                    }
+//                    //text
+//                    let text = obj["text"] ?? "(empty)"
+//                    print("text =", text)
+//                }
+                
+//                print(json["name"] as! [[String:Any]] )
+                
+
+            } catch let jsonError as NSError {
+                print("json error: \(jsonError.localizedDescription)")
+                
+                return_name = "error"
+                
+            }
+            
+            
+        }
+        
         
 //        
 //        var clientError: NSError?
@@ -195,6 +244,8 @@ class ViewController: UIViewController {
 //                }
 //            }
 //        }
+        
+        return return_name
         
         
         
