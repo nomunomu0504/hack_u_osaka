@@ -9,6 +9,8 @@
 import UIKit
 import TwitterKit
 
+
+
 class ViewController: UIViewController {
     let tweetView = TWTRTweetView()
     
@@ -20,6 +22,8 @@ class ViewController: UIViewController {
             if (session != nil) {
                 print("signed in as \(session!.userName)");
                 
+                
+                
                 //                self.showSingleTweet()
                 //                self.actionForRestAPI()
                                 self.searchUser()
@@ -27,7 +31,13 @@ class ViewController: UIViewController {
                 
                 //                self.presentViewTimeLine(userId: "723513731930443776")
                 
-                self.segueToSecondViewController(userId: "899105546648797184")
+                // 次の遷移先のViewControllerインスタンスを生成する
+                let vc = TimeLineView()
+                
+                vc.userName = session!.userName
+                // presentViewControllerメソッドで遷移する
+                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                self.present(vc, animated: true, completion: nil)
                 
             } else {
                 print("error: \(error!.localizedDescription)");
@@ -93,30 +103,99 @@ class ViewController: UIViewController {
         
     }
     
+    
+    
+    var twitterAccount = ACAccount()
+    
     func searchUser(){
         
         
-        let client = TWTRAPIClient()
-        let statusesShowEndpoint = "https://api.twitter.com/1.1/users/search.json"
-        let params = ["q": "misaki masashi"]
-        var clientError : NSError?
+//        let client = TWTRAPIClient()
+//        let statusesShowEndpoint = "https://api.twitter.com/1.1/users/search.json"
+//        let params = ["q": "misaki masashi"]
+//        var clientError : NSError?
+//        
+//        let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
+//        
+//        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+//            if connectionError != nil {
+//                print("Error: \(connectionError!)")
+//            }
+//            
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: data!) as! [Any]
+//                
+//                print("search userName : ")
+//                print(String(json["name"] as! String))
+//                
+////                let obå
+//            } catch let jsonError as NSError {
+//                print("json error: \(jsonError.localizedDescription)")
+//            }
+//        }
+//        
         
-        let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
+//        
+//        var clientError: NSError?
+//        let path = "https://api.twitter.com/1.1/users/search.json"
+//        let endpoint = path
+//        
+//        let params = [
+//            "q": "misaki masashi",
+//            "lang": "ja",
+//            "count": "100",
+//            ]
+//        let request = Twitter.sharedInstance().apiClient
+////        apiClient.URLRequestWithMethod("GET", URL: endpoint, parameters: params, error: &clientError)
+//        
+//        if request != nil {
+//            Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: {
+//                response, data, err in
+//                if err == nil {
+//                    var jsonError: NSError?
+//                    let json: AnyObject? =  NSJSONSerialization.JSONObjectWithData(data,
+//                                                                                   options: nil,
+//                                                                                   error: &jsonError)
+//                    if let jsonArray = json as? NSArray {
+//                        tweets(TWTRTweet.tweetsWithJSONArray(jsonArray) as [TWTRTweet])
+//                    }
+//                } else {
+//                    error(err)
+//                }
+//            })
+//        }
         
-        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-            if connectionError != nil {
-                print("Error: \(connectionError!)")
-            }
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print("json: \(json)")
-                
-//                let obå
-            } catch let jsonError as NSError {
-                print("json error: \(jsonError.localizedDescription)")
-            }
-        }
+//        let URL = NSURL(string: "https://api.twitter.com/1.1/users/search.json")
+////        let params = ["status" : potStr]
+//        let params = [
+//                    "q": "misaki masashi",
+//                    "lang": "ja",
+//                    "count": "20",
+//                    ]
+//        
+//        // リクエストを生成
+//        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
+//                                requestMethod: .POST,
+//                                url: URL as URL!,
+//                                parameters: params)
+//        request?.account = twitterAccount
+//        request?.perform { (responseData, urlResponse, error) -> Void in
+//            
+//            if error != nil {
+//                print("error is \(String(describing: error))")
+//            }
+//            else {
+//                // 結果の表示
+//                do {
+//                    let result = try JSONSerialization.jsonObject(with: responseData!,
+//                                                                  options: .allowFragments) as! NSDictionary
+//                    print("result is \(result)")
+//                } catch {
+//                    return
+//                }
+//            }
+//        }
+        
         
         
     }
