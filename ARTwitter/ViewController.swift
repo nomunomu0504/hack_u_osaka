@@ -19,17 +19,17 @@ class ViewController: UIViewController {
     
     
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        // 次の遷移先のViewControllerインスタンスを生成する
-        let vc = WebViewController()
-        
-        vc.searchWord = "サンドーム"
-        // presentViewControllerメソッドで遷移する
-        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-        self.present(vc, animated: true, completion: nil)
-    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//        // 次の遷移先のViewControllerインスタンスを生成する
+//        let vc = WebViewController()
+//
+//        vc.searchWord = "ああ"
+//        // presentViewControllerメソッドで遷移する
+//        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+//        self.present(vc, animated: true, completion: nil)
+//    }
     
     
     override func viewDidLoad() {
@@ -41,6 +41,7 @@ class ViewController: UIViewController {
         
         // Swift
         let logInButton = TWTRLogInButton(logInCompletion: { session, error in
+            print("tapped!")
             if (session != nil) {
                 print("signed in as \(session!.userName)");
                 
@@ -52,8 +53,16 @@ class ViewController: UIViewController {
                 //                self.displayUser()
                 
                 //                self.presentViewTimeLine(userId: "723513731930443776")
-                
-                var send_name = self.searchUser(USERNAME:"hanaDojo") //ここでアカウント検索
+                print("tapped!")
+//                // 次の遷移先のViewControllerインスタンスを生成する
+//                let vc = CameraViewContoller()
+//
+//                // presentViewControllerメソッドで遷移する
+//                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+//                self.present(vc, animated: true, completion: nil) //swift4
+//
+
+                print("tapped!")
                 
                 
                 
@@ -240,23 +249,6 @@ class ViewController: UIViewController {
     }
     
     
-    
-    func presentViewTimeLine(userId: String){
-        
-        // 遷移するViewを定義する.
-        var timeLine: UIViewController = TimeLineView()
-        
-        //        timeLine.showTimeLine(userId:"\(userId)")
-        
-        
-        
-        
-        // アニメーションを設定する.
-        timeLine.modalTransitionStyle = UIModalTransitionStyle.partialCurl
-        
-        // Viewの移動する.
-        self.present(timeLine, animated: true, completion: nil)
-    }
     
     
     

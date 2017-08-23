@@ -34,10 +34,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show your location on the map</string>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -51,7 +47,7 @@
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>twitterkit-<consumerKey></string>
+                <string>twitterkit-aNZw3tLHmjlcOqz2qxHl1muA8</string>
                 </array>
             </dict>
         </array>

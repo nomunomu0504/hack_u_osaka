@@ -12,6 +12,7 @@ import AVFoundation
 
 import GooglePlaces
 import CoreLocation
+import TwitterKit
 
 
 class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
@@ -287,29 +288,178 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
     
     
     
+//    func showalert(){
+//        
+//        
+//        if alertFlag == true{
+//            // UIAlertControllerを作成する.
+//            let myAlert: UIAlertController = UIAlertController(title: "タイトル", message: "メッセージ", preferredStyle: .alert)
+//            
+//            alertFlag = false
+//            // OKのアクションを作成する.
+//            let myOkAction = UIAlertAction(title: "OK", style: .default) { action in
+//                print("Action OK!!")
+//                self.alertFlag = true
+//                
+//            }
+//            
+//            // OKのActionを追加する.
+//            myAlert.addAction(myOkAction)
+//            
+//            // UIAlertを発動する.
+//            present(myAlert, animated: true, completion: nil)
+//        }
+//        
+//    }
+    
+    
+    
+    
+    
     func showalert(){
         
         
         if alertFlag == true{
-            // UIAlertControllerを作成する.
-            let myAlert: UIAlertController = UIAlertController(title: "タイトル", message: "メッセージ", preferredStyle: .alert)
             
             alertFlag = false
-            // OKのアクションを作成する.
-            let myOkAction = UIAlertAction(title: "OK", style: .default) { action in
-                print("Action OK!!")
+            
+            
+            let alert: UIAlertController = UIAlertController(title: "アラート表示", message: "保存してもいいですか？", preferredStyle:  UIAlertControllerStyle.actionSheet)
+            
+            
+            let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                
+                // 次の遷移先のViewControllerインスタンスを生成する
+                let vc = WebViewController()
+                
+                vc.searchWord = "\(self.DataArray[0][0] as! String)"
+                // presentViewControllerメソッドで遷移する
+                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                self.present(vc, animated: true, completion: nil)
+                
                 self.alertFlag = true
                 
-            }
+                print("OK")
+            })
             
-            // OKのActionを追加する.
-            myAlert.addAction(myOkAction)
             
-            // UIAlertを発動する.
-            present(myAlert, animated: true, completion: nil)
+            let defaultAction2: UIAlertAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.default, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                print("OK")
+                
+                
+                
+                self.searchUser(USERNAME: self.DataArray[0][0] as! String) //twitter 遷移
+                
+                self.alertFlag = true
+            })
+            
+            
+            // キャンセルボタン
+            let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                print("Cancel")
+                self.alertFlag = true
+            })
+            
+            // ③ UIAlertControllerにActionを追加
+            alert.addAction(cancelAction)
+            alert.addAction(defaultAction2)
+            alert.addAction(defaultAction)
+            
+            // ④ Alertを表示
+            present(alert, animated: true, completion: nil)
+            
         }
         
     }
+
+    
+    
+    
+    
+    
+    func searchUser(USERNAME: String) -> String{
+        
+        
+        let client = TWTRAPIClient()
+        let statusesShowEndpoint = "https://api.twitter.com/1.1/users/search.json"
+        let params = ["q": USERNAME]
+        var clientError : NSError?
+        var return_name = String()
+        
+        
+        let request = client.urlRequest(withMethod: "GET", url: statusesShowEndpoint, parameters: params, error: &clientError)
+        
+        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+            if connectionError != nil {
+                print("Error: \(connectionError!)")
+            }
+            
+            do {
+                
+                
+                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [[String:Any]]
+                
+                
+                print("json = ")
+                print(json)
+                //                print(json[0]["name"]!)
+                
+                if let username_geted = json[0]["screen_name"] as? String{
+                    print("json =")
+                    print(username_geted)
+                    return_name = username_geted
+                    
+                    
+                    print("send_name =")
+                    print(return_name)
+                    
+                    // 次の遷移先のViewControllerインスタンスを生成する
+                    let vc = TimeLineView()
+                    
+                    vc.userName = return_name
+                    // presentViewControllerメソッドで遷移する
+                    // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                    self.present(vc, animated: true, completion: nil)
+                    
+                    
+                }else{
+                    print("error")
+                    
+                    return_name = "error"
+                    
+                }
+                
+                
+            } catch let jsonError as NSError {
+                print("json error: \(jsonError.localizedDescription)")
+                
+                return_name = "error"
+                
+            }
+            
+            
+        }
+        
+        
+        
+        return return_name
+        
+        
+        
+    }
+
+    
+    
+    
+    
+    
+    
     
     
     let lm = CLLocationManager()
