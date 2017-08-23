@@ -252,11 +252,14 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
             
             
             
-            let angle_:Double = angle(a: Point(x: self.latitude, y: self.longitude),
-                                      b: Point(x: Double(self.DataArray[0][2] as! Double),
-                                               y: Double(self.DataArray[0][3] as! Double)) //ここを変更
-            )
+//            let angle_:Double = angle(a: Point(x: self.latitude, y: self.longitude),
+//                                      b: Point(x: Double(self.DataArray[0][2] as! Double),
+//                                               y: Double(self.DataArray[0][3] as! Double)) //ここを変更
+//            )
             
+             // 緯度経度 lat1, lng1 の点を出発として、緯度経度 lat2, lng2 への方位
+            let angle_: Double = angle2(lat1: self.latitude, lng1: self.longitude,
+                                         lat2: Double(self.DataArray[0][2] as! Double), lng2: Double(self.DataArray[0][3] as! Double))
 
             
             print("place name")
@@ -605,12 +608,40 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
     }
     
     
+    func angle2(lat1: Double, lng1: Double, lat2 : Double, lng2 : Double) -> Double{
+        
+            // 緯度経度 lat1, lng1 の点を出発として、緯度経度 lat2, lng2 への方位
+            // 北を０度で右回りの角度０～３６０度
+            var Y = cos(lng2 * M_PI / 180) * sin(lat2 * M_PI / 180 - lat1 * M_PI / 180);
+            var X = cos(lng1 * M_PI / 180) * sin(lng2 * M_PI / 180) - sin(lng1 * M_PI / 180) * cos(lng2 * M_PI / 180) * cos(lat2 * M_PI / 180 - lat1 * M_PI / 180);
+            var dirE0 = 180 * atan2(Y, X) / M_PI; // 東向きが０度の方向
+            if (dirE0 < 0) {
+                dirE0 = dirE0 + 360; //0～360 にする。
+            }
+        
+            dirE0 = dirE0 + 90
+            let dirN0 = dirE0.truncatingRemainder(dividingBy: 360)  //(dirE0+90)÷360の余りを出力 北向きが０度の方向
+        
+        return dirN0;
+        
+    }
+    
+    
     
     
     func distance(a:Point, b:Point) -> Double {
         return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2))
     }
     
+    
+    func distance2(a:Point, b:Point) -> Double{
+        
+        let now_iti: CLLocation = CLLocation(latitude: a.x, longitude: a.y)
+        let go_iti: CLLocation = CLLocation(latitude: b.x, longitude: b.y)
+        let distance_now = go_iti.distance(from: now_iti)
+        
+        return distance_now
+    }
     
     
     
@@ -650,7 +681,7 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
             
             
             
-            var coordinate_distance = distance(a:  Point(x: self.latitude, y: self.longitude),
+            var coordinate_distance = distance2(a:  Point(x: self.latitude, y: self.longitude),
                                                b: Point(x: Double(element.place.coordinate.latitude),
                                                         y: Double(element.place.coordinate.longitude)))
             
