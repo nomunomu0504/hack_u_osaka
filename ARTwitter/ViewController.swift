@@ -63,7 +63,14 @@ class ViewController: UIViewController {
 //
 
                 print("tapped!")
-                
+//
+//                let vc = TimeLineView()
+////                vc.searchWord = "あ"
+//                vc.userName = "あ"
+//                // presentViewControllerメソッドで遷移する
+//                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+//                self.present(vc, animated: true, completion: nil)
+
                 
                 
             } else {

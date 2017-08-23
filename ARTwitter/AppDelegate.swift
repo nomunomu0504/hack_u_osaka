@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        Twitter.sharedInstance().start(withConsumerKey: "aNZw3tLHmjlcOqz2qxHl1muA8", consumerSecret: "fYOjKlR1hFT2tYDdaELNOIKop4wqqjq7nHAvcPnF3nxAY5YMyX")
         Twitter.sharedInstance().start(withConsumerKey: "aNZw3tLHmjlcOqz2qxHl1muA8", consumerSecret: "fYOjKlR1hFT2tYDdaELNOIKop4wqqjq7nHAvcPnF3nxAY5YMyX")
         
         GMSPlacesClient.provideAPIKey("AIzaSyC-Jj6LgjPkVbCsdH2nK1KsvvveOP84nbI")
