@@ -19,60 +19,28 @@ class ViewController: UIViewController {
     
     
     
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//
+
+    override func viewDidAppear(_ animated: Bool) {
+
+        
 //        // 次の遷移先のViewControllerインスタンスを生成する
-//        let vc = WebViewController()
+//        let vc = CameraViewContoller()
 //
-//        vc.searchWord = "ああ"
 //        // presentViewControllerメソッドで遷移する
 //        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-//        self.present(vc, animated: true, completion: nil)
-//    }
+//        self.present(vc, animated: true, completion: nil) //swift4
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-   
-        
-        
         // Swift
         let logInButton = TWTRLogInButton(logInCompletion: { session, error in
-            print("tapped!")
             if (session != nil) {
                 print("signed in as \(session!.userName)");
-                
-                
-                
-                //                self.showSingleTweet()
-                //                self.actionForRestAPI()
-                
-                //                self.displayUser()
-                
-                //                self.presentViewTimeLine(userId: "723513731930443776")
-                print("tapped!")
-//                // 次の遷移先のViewControllerインスタンスを生成する
-//                let vc = CameraViewContoller()
-//
-//                // presentViewControllerメソッドで遷移する
-//                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-//                self.present(vc, animated: true, completion: nil) //swift4
-//
-
-                print("tapped!")
-//
-//                let vc = TimeLineView()
-////                vc.searchWord = "あ"
-//                vc.userName = "あ"
-//                // presentViewControllerメソッドで遷移する
-//                // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-//                self.present(vc, animated: true, completion: nil)
-
-                
-                
             } else {
                 print("error: \(error!.localizedDescription)");
             }
@@ -80,14 +48,17 @@ class ViewController: UIViewController {
         logInButton.center = self.view.center
         self.view.addSubview(logInButton)
         
+
+        
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     // Swift
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
