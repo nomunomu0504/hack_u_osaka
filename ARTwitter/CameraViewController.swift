@@ -324,7 +324,7 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
             alertFlag = false
             
             
-            let alert: UIAlertController = UIAlertController(title: "アラート表示", message: "保存してもいいですか？", preferredStyle:  UIAlertControllerStyle.actionSheet)
+            let alert: UIAlertController = UIAlertController(title: "店を見つけました", message: "\(self.DataArray[0][0] as! String)の何を見たいですか？", preferredStyle:  UIAlertControllerStyle.actionSheet)
             
             
             let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
@@ -353,6 +353,7 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
                 
                 
                 self.searchUser(USERNAME: self.DataArray[0][0] as! String) //twitter 遷移
+//                self.searchUser(USERNAME: "hanadojo")
                 
                 self.alertFlag = true
             })
@@ -410,28 +411,79 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
                 print(json)
                 //                print(json[0]["name"]!)
                 
-                if let username_geted = json[0]["screen_name"] as? String{
-                    print("json =")
-                    print(username_geted)
-                    return_name = username_geted
+                if json.count != 0 {
+                
+                    if let username_geted = json[0]["screen_name"] as? String{
+                        print("json =")
+                        print(username_geted)
+                        return_name = username_geted
+                        
+                        
+                        print("send_name =")
+                        print(return_name)
+                        
+                        // 次の遷移先のViewControllerインスタンスを生成する
+                        let vc = TimeLineView()
+                        
+                        vc.userName = return_name
+                        // presentViewControllerメソッドで遷移する
+                        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                        self.present(vc, animated: true, completion: nil)
+                        
+                        
+                    }else{
+                        print("error")
+                        
+                        return_name = "error"
+                        
+                    }
+                } else{
                     
                     
-                    print("send_name =")
-                    print(return_name)
                     
-                    // 次の遷移先のViewControllerインスタンスを生成する
-                    let vc = TimeLineView()
-                    
-                    vc.userName = return_name
-                    // presentViewControllerメソッドで遷移する
-                    // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-                    self.present(vc, animated: true, completion: nil)
+                    //twitter pageを見つけられなかった場合
+                    let alert: UIAlertController = UIAlertController(title: "Twitterアカウントを見つけられませんでした", message: "", preferredStyle:  UIAlertControllerStyle.actionSheet)
                     
                     
-                }else{
-                    print("error")
                     
-                    return_name = "error"
+                    let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
+                        // ボタンが押された時の処理を書く（クロージャ実装）
+                        (action: UIAlertAction!) -> Void in
+                        
+                        // 次の遷移先のViewControllerインスタンスを生成する
+                        let vc = WebViewController()
+                        
+                        vc.searchWord = "\(self.DataArray[0][0] as! String)"
+                        // presentViewControllerメソッドで遷移する
+                        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                        self.present(vc, animated: true, completion: nil)
+                        
+                        self.alertFlag = true
+                        
+                        print("OK")
+                    })
+                    
+
+                    
+                    
+                    // キャンセルボタン
+                    let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                        // ボタンが押された時の処理を書く（クロージャ実装）
+                        (action: UIAlertAction!) -> Void in
+                        print("Cancel")
+                        self.alertFlag = true
+                    })
+                    
+                    // ③ UIAlertControllerにActionを追加
+                    alert.addAction(cancelAction)
+                    
+                    alert.addAction(defaultAction)
+
+                    // ④ Alertを表示
+                    self.present(alert, animated: true, completion: nil)
+                    
+
+                    
                     
                 }
                 

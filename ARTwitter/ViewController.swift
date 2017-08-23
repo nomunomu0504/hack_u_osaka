@@ -41,6 +41,16 @@ class ViewController: UIViewController {
         let logInButton = TWTRLogInButton(logInCompletion: { session, error in
             if (session != nil) {
                 print("signed in as \(session!.userName)");
+                
+                        // 次の遷移先のViewControllerインスタンスを生成する
+                let vc = CameraViewContoller()
+                
+                        // presentViewControllerメソッドで遷移する
+                        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                self.present(vc, animated: true, completion: nil) //swift4
+
+                
+                
             } else {
                 print("error: \(error!.localizedDescription)");
             }
