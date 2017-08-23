@@ -14,8 +14,30 @@ import TwitterKit
 class ViewController: UIViewController {
     let tweetView = TWTRTweetView()
     
+    
+    
+    
+    
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // 次の遷移先のViewControllerインスタンスを生成する
+        let vc = WebViewController()
+        
+        vc.searchWord = "サンドーム"
+        // presentViewControllerメソッドで遷移する
+        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+   
+        
         
         // Swift
         let logInButton = TWTRLogInButton(logInCompletion: { session, error in
@@ -184,66 +206,6 @@ class ViewController: UIViewController {
         }
         
         
-//        
-//        var clientError: NSError?
-//        let path = "https://api.twitter.com/1.1/users/search.json"
-//        let endpoint = path
-//        
-//        let params = [
-//            "q": "misaki masashi",
-//            "lang": "ja",
-//            "count": "100",
-//            ]
-//        let request = Twitter.sharedInstance().apiClient
-////        apiClient.URLRequestWithMethod("GET", URL: endpoint, parameters: params, error: &clientError)
-//        
-//        if request != nil {
-//            Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: {
-//                response, data, err in
-//                if err == nil {
-//                    var jsonError: NSError?
-//                    let json: AnyObject? =  NSJSONSerialization.JSONObjectWithData(data,
-//                                                                                   options: nil,
-//                                                                                   error: &jsonError)
-//                    if let jsonArray = json as? NSArray {
-//                        tweets(TWTRTweet.tweetsWithJSONArray(jsonArray) as [TWTRTweet])
-//                    }
-//                } else {
-//                    error(err)
-//                }
-//            })
-//        }
-        
-//        let URL = NSURL(string: "https://api.twitter.com/1.1/users/search.json")
-////        let params = ["status" : potStr]
-//        let params = [
-//                    "q": "misaki masashi",
-//                    "lang": "ja",
-//                    "count": "20",
-//                    ]
-//        
-//        // リクエストを生成
-//        let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-//                                requestMethod: .POST,
-//                                url: URL as URL!,
-//                                parameters: params)
-//        request?.account = twitterAccount
-//        request?.perform { (responseData, urlResponse, error) -> Void in
-//            
-//            if error != nil {
-//                print("error is \(String(describing: error))")
-//            }
-//            else {
-//                // 結果の表示
-//                do {
-//                    let result = try JSONSerialization.jsonObject(with: responseData!,
-//                                                                  options: .allowFragments) as! NSDictionary
-//                    print("result is \(result)")
-//                } catch {
-//                    return
-//                }
-//            }
-//        }
         
         return return_name
         
