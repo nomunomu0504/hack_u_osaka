@@ -23,12 +23,12 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         // 次の遷移先のViewControllerインスタンスを生成する
-        let vc = WebViewController()
-        
-        vc.searchWord = "サンドーム"
-        // presentViewControllerメソッドで遷移する
-        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-        self.present(vc, animated: true, completion: nil)
+//        let vc = WebViewController()
+//        
+//        vc.searchWord = "サンドーム"
+//        // presentViewControllerメソッドで遷移する
+//        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+//        self.present(vc, animated: true, completion: nil)
     }
     
     
