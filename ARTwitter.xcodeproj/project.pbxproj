@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41709C598D8CBD5B64EA0BDD /* Pods_ARTwitterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8002776E02A95E1D2241DC99 /* Pods_ARTwitterUITests.framework */; };
+		752BB38A1F4D1793000C2733 /* CameraViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BB3891F4D1793000C2733 /* CameraViewcontroller.swift */; };
 		75DC4FF41F4C4EEA00A87529 /* TwitterCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DC4FF31F4C4EEA00A87529 /* TwitterCommunicator.swift */; };
 		75DF91551F4CF86500D31A51 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF91541F4CF86500D31A51 /* WebViewController.swift */; };
 		75DF91571F4CFA3000D31A51 /* NextViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DF91561F4CFA3000D31A51 /* NextViewContoller.swift */; };
@@ -47,6 +48,7 @@
 		51515F134596A5B11374D29A /* Pods-ARTwitterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTwitterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARTwitterUITests/Pods-ARTwitterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		61F519CE83A3979C87A6F826 /* Pods_ARTwitterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARTwitterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6606AAEC89332B7801922320 /* Pods-ARTwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARTwitterTests/Pods-ARTwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		752BB3891F4D1793000C2733 /* CameraViewcontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewcontroller.swift; sourceTree = "<group>"; };
 		75DC4FF31F4C4EEA00A87529 /* TwitterCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterCommunicator.swift; sourceTree = "<group>"; };
 		75DF91541F4CF86500D31A51 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		75DF91561F4CFA3000D31A51 /* NextViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextViewContoller.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				75E3EC191F3C77540089EB25 /* ViewController.swift */,
 				75DF91561F4CFA3000D31A51 /* NextViewContoller.swift */,
 				75DF91541F4CF86500D31A51 /* WebViewController.swift */,
+				752BB3891F4D1793000C2733 /* CameraViewcontroller.swift */,
 				D094F6D01F493AC500210D7C /* TimeLineView.swift */,
 				75DC4FF31F4C4EEA00A87529 /* TwitterCommunicator.swift */,
 				D094F6D21F493CF100210D7C /* Main.storyboard */,
@@ -481,6 +484,7 @@
 				75DF91551F4CF86500D31A51 /* WebViewController.swift in Sources */,
 				75E3EC1A1F3C77540089EB25 /* ViewController.swift in Sources */,
 				75E3EC181F3C77540089EB25 /* AppDelegate.swift in Sources */,
+				752BB38A1F4D1793000C2733 /* CameraViewcontroller.swift in Sources */,
 				D094F6D11F493AC500210D7C /* TimeLineView.swift in Sources */,
 				75DC4FF41F4C4EEA00A87529 /* TwitterCommunicator.swift in Sources */,
 			);
