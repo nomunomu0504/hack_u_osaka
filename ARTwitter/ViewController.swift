@@ -84,6 +84,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             myLocationManager.requestWhenInUseAuthorization()
         }
         
+        
+        
+        
+        
+        
         // 位置情報の更新を開始.
         myLocationManager.startUpdatingLocation()
         
@@ -101,6 +106,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // MapViewをViewに追加.
         self.view.addSubview(mapView)
+        
+
+        
         
         // 中心点の緯度経度.
         let myLat: CLLocationDegrees = 37.506804
@@ -121,10 +129,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //        // UIボタンを作成.
         let myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 50))
 //        myButton.backgroundColor = UIColor.orange
+        myButton.backgroundColor = UIColor.darkGray
         myButton.layer.masksToBounds = true
         myButton.setTitle("camera", for: .normal)
 //        myButton.setTitleColor(for: UIColor.black)
-        myButton.setTitleColor(UIColor.black, for: .normal) // タイトルの色
+        myButton.setTitleColor(UIColor.white, for: .normal) // タイトルの色
         myButton.layer.cornerRadius = 20.0
         myButton.layer.position = CGPoint(x: self.view.bounds.width/2 + 70, y:self.view.bounds.height-50)
         myButton.addTarget(self, action: #selector(onClickMyButton), for: .touchUpInside)
@@ -139,6 +148,27 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     // ボタンイベント.
     func onClickMyButton(sender: UIButton){
+        
+        arViewController = ARViewController()
+        arViewController.dataSource = self
+        arViewController.maxDistance = 0
+        arViewController.maxVisibleAnnotations = 30
+        arViewController.maxVerticalLevel = 5
+        arViewController.headingSmoothingFactor = 0.05
+        
+        arViewController.trackingManager.userDistanceFilter = 25
+        arViewController.trackingManager.reloadDistanceFilter = 75
+        arViewController.setAnnotations(places)
+        arViewController.uiOptions.debugEnabled = false
+        arViewController.uiOptions.closeButtonEnabled = true
+        
+        self.present(arViewController, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    func show(){
         
         arViewController = ARViewController()
         arViewController.dataSource = self
@@ -224,7 +254,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 // ここで、animatedをtrueにするとアニメーションしながら遷移できる
                 self.arViewController.present(vc, animated: true, completion: nil)
                 
-//                self.alertFlag = true
+                self.alertFlag = true
                 
                 print("OK")
             })
@@ -353,7 +383,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     print(json)
                     //                print(json[0]["name"]!)
                     
-                    
+                    if json.count != 0{
                     
                     if let username_geted = json[0]["screen_name"] as? String{
                         print("json =")
@@ -380,6 +410,54 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         
                     }
                     
+                    }else{
+                        
+                        
+                        //twitter pageを見つけられなかった場合
+                        let alert: UIAlertController = UIAlertController(title: "Twitterアカウントを見つけられませんでした", message: "", preferredStyle:  UIAlertControllerStyle.actionSheet)
+                        
+                        
+                        
+                        let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
+                            // ボタンが押された時の処理を書く（クロージャ実装）
+                            (action: UIAlertAction!) -> Void in
+                            
+                            // 次の遷移先のViewControllerインスタンスを生成する
+                            let vc = WebViewController()
+                            
+                            vc.searchWord = "\(USERNAME)"
+                            // presentViewControllerメソッドで遷移する
+                            // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                            self.arViewController.present(vc, animated: true, completion: nil)
+                            
+                            self.alertFlag = true
+                            
+                            print("OK")
+                        })
+                        
+                        
+                        
+                        
+                        // キャンセルボタン
+                        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                            // ボタンが押された時の処理を書く（クロージャ実装）
+                            (action: UIAlertAction!) -> Void in
+                            print("Cancel")
+                            self.alertFlag = true
+                        })
+                        
+                        // ③ UIAlertControllerにActionを追加
+                        alert.addAction(cancelAction)
+                        
+                        alert.addAction(defaultAction)
+                        
+                        // ④ Alertを表示
+                        self.arViewController.present(alert, animated: true, completion: nil)
+                        
+                        
+                        
+
+                    }
                     
                 } catch let jsonError as NSError {
                     print("json error: \(jsonError.localizedDescription)")
@@ -449,6 +527,7 @@ extension ViewController  {
                             }
                         }
                         
+
                         
                         
                         

@@ -52,7 +52,7 @@ class AnnotationView: ARAnnotationView {
     
     distanceLabel = UILabel(frame: CGRect(x: 10, y: 30, width: self.frame.size.width, height: 20))
     distanceLabel?.backgroundColor = UIColor(white: 0.3, alpha: 0.7)
-    distanceLabel?.textColor = UIColor.green
+    distanceLabel?.textColor = UIColor.blue
     distanceLabel?.font = UIFont.systemFont(ofSize: 12)
     self.addSubview(distanceLabel!)
     

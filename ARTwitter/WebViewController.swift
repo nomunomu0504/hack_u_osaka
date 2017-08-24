@@ -48,6 +48,22 @@ class WebViewController: UIViewController,UIWebViewDelegate {
         webView.loadRequest(request as URLRequest)
 
         
+        
+        
+        //        // UIボタンを作成.
+        let myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                myButton.backgroundColor = UIColor.orange
+        myButton.layer.masksToBounds = true
+        myButton.setTitle("X", for: .normal)
+        //        myButton.setTitleColor(for: UIColor.black)
+        myButton.setTitleColor(UIColor.black, for: .normal) // タイトルの色
+        myButton.layer.cornerRadius = 15.0
+        myButton.layer.position = CGPoint(x: self.view.bounds.width/2 + 140, y:self.view.bounds.height/2 - 230)
+        myButton.addTarget(self, action: #selector(returnView), for: .touchUpInside)
+        
+        // UIボタンをViewに追加.
+        self.webView.addSubview(myButton)
+        
     }
 
 
@@ -64,4 +80,15 @@ class WebViewController: UIViewController,UIWebViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-    }}
+    }
+    
+    func returnView(){
+        
+        // 戻る場合には、dismissViewControllerAnimatedメソッドを使います。
+        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+        self.dismiss(animated: true, completion: nil)
+    }
+
+
+
+}
