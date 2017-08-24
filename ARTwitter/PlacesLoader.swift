@@ -44,7 +44,7 @@ struct PlacesLoader {
       } else if let httpResponse = response as? HTTPURLResponse {
         if httpResponse.statusCode == 200 {
           print(data!)
-          print("error_ ? ")
+//          print("error_ ? ")
           do {
             let responseObject = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             guard let responseDict = responseObject as? NSDictionary else {
