@@ -86,13 +86,13 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
         self.view.addSubview(label)
 
         
-        
+        tapStart()
         
         
         // google place api 起動
         placesClient = GMSPlacesClient.shared()
         
-        tapStart()
+
         getCurrentPlace()
         
         
@@ -402,103 +402,107 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
         client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
             if connectionError != nil {
                 print("Error: \(connectionError!)")
-            }
-            
-            do {
+                
+                //twitter pageを見つけられなかった場合
+                let alert: UIAlertController = UIAlertController(title: "Twitterアカウントを見つけられませんでした", message: "", preferredStyle:  UIAlertControllerStyle.actionSheet)
                 
                 
-                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [[String:Any]]
+                
+                let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
+                    // ボタンが押された時の処理を書く（クロージャ実装）
+                    (action: UIAlertAction!) -> Void in
+                    
+                    // 次の遷移先のViewControllerインスタンスを生成する
+                    let vc = WebViewController()
+                    
+                    vc.searchWord = "\(self.DataArray[0][0] as! String)"
+                    // presentViewControllerメソッドで遷移する
+                    // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                    self.present(vc, animated: true, completion: nil)
+                    
+                    self.alertFlag = true
+                    
+                    print("OK")
+                })
                 
                 
-                print("json = ")
-                print(json)
-                //                print(json[0]["name"]!)
                 
-                if json.count != 0 {
                 
-                    if let username_geted = json[0]["screen_name"] as? String{
-                        print("json =")
-                        print(username_geted)
-                        return_name = username_geted
-                        
-                        
-                        print("send_name =")
-                        print(return_name)
-                        
-                        // 次の遷移先のViewControllerインスタンスを生成する
-                        let vc = TimeLineView()
-                        
-                        vc.userName = return_name
-                        // presentViewControllerメソッドで遷移する
-                        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-                        self.present(vc, animated: true, completion: nil)
-                        
-                        
-                    }else{
-                        print("error")
-                        
-                        return_name = "error"
-                        
-                    }
-                } else{
-                    
-                    
-                    
-                    //twitter pageを見つけられなかった場合
-                    let alert: UIAlertController = UIAlertController(title: "Twitterアカウントを見つけられませんでした", message: "", preferredStyle:  UIAlertControllerStyle.actionSheet)
-                    
-                    
-                    
-                    let defaultAction: UIAlertAction = UIAlertAction(title: "web", style: UIAlertActionStyle.default, handler:{
-                        // ボタンが押された時の処理を書く（クロージャ実装）
-                        (action: UIAlertAction!) -> Void in
-                        
-                        // 次の遷移先のViewControllerインスタンスを生成する
-                        let vc = WebViewController()
-                        
-                        vc.searchWord = "\(self.DataArray[0][0] as! String)"
-                        // presentViewControllerメソッドで遷移する
-                        // ここで、animatedをtrueにするとアニメーションしながら遷移できる
-                        self.present(vc, animated: true, completion: nil)
-                        
-                        self.alertFlag = true
-                        
-                        print("OK")
-                    })
-                    
+                // キャンセルボタン
+                let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+                    // ボタンが押された時の処理を書く（クロージャ実装）
+                    (action: UIAlertAction!) -> Void in
+                    print("Cancel")
+                    self.alertFlag = true
+                })
+                
+                // ③ UIAlertControllerにActionを追加
+                alert.addAction(cancelAction)
+                
+                alert.addAction(defaultAction)
+                
+                // ④ Alertを表示
+                self.present(alert, animated: true, completion: nil)
+                
+                
+                
 
+            }else{
+                
+                do {
+                    
+    //                print("data =")
+    //                print(data!)
+                    
+                    // NSData to String
+    //                let out: String = NSString(data:data!, encoding:String.Encoding.utf8.rawValue) as! String
+    //                print(out) // ==> Hello
                     
                     
-                    // キャンセルボタン
-                    let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
-                        // ボタンが押された時の処理を書く（クロージャ実装）
-                        (action: UIAlertAction!) -> Void in
-                        print("Cancel")
-                        self.alertFlag = true
-                    })
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [[String:Any]]
                     
-                    // ③ UIAlertControllerにActionを追加
-                    alert.addAction(cancelAction)
                     
-                    alert.addAction(defaultAction)
-
-                    // ④ Alertを表示
-                    self.present(alert, animated: true, completion: nil)
+                    print("json = ")
+                    print(json)
+                    //                print(json[0]["name"]!)
                     
-
+  
                     
+                        if let username_geted = json[0]["screen_name"] as? String{
+                            print("json =")
+                            print(username_geted)
+                            return_name = username_geted
+                            
+                            
+                            print("send_name =")
+                            print(return_name)
+                            
+                            // 次の遷移先のViewControllerインスタンスを生成する
+                            let vc = TimeLineView()
+                            
+                            vc.userName = return_name
+                            // presentViewControllerメソッドで遷移する
+                            // ここで、animatedをtrueにするとアニメーションしながら遷移できる
+                            self.present(vc, animated: true, completion: nil)
+                            
+                            
+                        }else{
+                            print("error")
+                            
+                            return_name = "error"
+                            
+                        }
+                    
+                    
+                } catch let jsonError as NSError {
+                    print("json error: \(jsonError.localizedDescription)")
+                    
+                    return_name = "error"
                     
                 }
                 
                 
-            } catch let jsonError as NSError {
-                print("json error: \(jsonError.localizedDescription)")
-                
-                return_name = "error"
-                
             }
-            
-            
         }
         
         
@@ -526,6 +530,9 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
         lm.delegate = self
         startLocationService()
         startHeadingService()
+        
+
+
     }
     
     func tapStop() {
@@ -539,6 +546,7 @@ class CameraViewContoller: UIViewController,  CLLocationManagerDelegate {
         lm.headingOrientation = .portrait
         lm.headingFilter = 1
         lm.startUpdatingHeading()
+        
     }
     
     func startLocationService() {

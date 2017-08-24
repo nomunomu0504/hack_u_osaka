@@ -13,6 +13,8 @@ target 'ARTwitter' do
 pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
+#pod 'HDAugmentedReality'
+
   target 'ARTwitterTests' do
     inherit! :search_paths
     # Pods for testing
