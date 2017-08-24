@@ -12,6 +12,12 @@
 		75009D301F4E9D58002021DC /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D2F1F4E9D58002021DC /* Place.swift */; };
 		75009D321F4E9D5E002021DC /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D311F4E9D5E002021DC /* PlaceAnnotation.swift */; };
 		75009D341F4E9D66002021DC /* PlacesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D331F4E9D65002021DC /* PlacesLoader.swift */; };
+		75009D631F4EADCE002021DC /* ARAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D571F4EAD86002021DC /* ARAnnotation.swift */; };
+		75009D641F4EADCE002021DC /* ARAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D581F4EAD86002021DC /* ARAnnotationView.swift */; };
+		75009D651F4EADCE002021DC /* ARConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D591F4EAD86002021DC /* ARConfiguration.swift */; };
+		75009D661F4EADCE002021DC /* ARTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D5A1F4EAD86002021DC /* ARTrackingManager.swift */; };
+		75009D671F4EADCE002021DC /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D5B1F4EAD86002021DC /* ARViewController.swift */; };
+		75009D681F4EADCE002021DC /* DebugMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75009D5D1F4EAD86002021DC /* DebugMapViewController.swift */; };
 		752BB38A1F4D1793000C2733 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752BB3891F4D1793000C2733 /* CameraViewController.swift */; };
 		75642A121F4D1E0100863E10 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75642A111F4D1E0100863E10 /* TestViewController.swift */; };
 		75DC4FF41F4C4EEA00A87529 /* TwitterCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DC4FF31F4C4EEA00A87529 /* TwitterCommunicator.swift */; };
@@ -57,6 +63,16 @@
 		75009D2F1F4E9D58002021DC /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		75009D311F4E9D5E002021DC /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		75009D331F4E9D65002021DC /* PlacesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesLoader.swift; sourceTree = "<group>"; };
+		75009D571F4EAD86002021DC /* ARAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARAnnotation.swift; sourceTree = "<group>"; };
+		75009D581F4EAD86002021DC /* ARAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARAnnotationView.swift; sourceTree = "<group>"; };
+		75009D591F4EAD86002021DC /* ARConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARConfiguration.swift; sourceTree = "<group>"; };
+		75009D5A1F4EAD86002021DC /* ARTrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTrackingManager.swift; sourceTree = "<group>"; };
+		75009D5B1F4EAD86002021DC /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		75009D5D1F4EAD86002021DC /* DebugMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMapViewController.swift; sourceTree = "<group>"; };
+		75009D5F1F4EAD86002021DC /* DebugMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DebugMapViewController.xib; sourceTree = "<group>"; };
+		75009D601F4EAD86002021DC /* hdar_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hdar_close.png; sourceTree = "<group>"; };
+		75009D611F4EAD86002021DC /* hdar_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hdar_close@2x.png"; sourceTree = "<group>"; };
+		75009D621F4EAD86002021DC /* hdar_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hdar_close@3x.png"; sourceTree = "<group>"; };
 		752BB3891F4D1793000C2733 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		75642A111F4D1E0100863E10 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		75DC4FF31F4C4EEA00A87529 /* TwitterCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterCommunicator.swift; sourceTree = "<group>"; };
@@ -121,6 +137,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		75009D551F4EAD86002021DC /* HDAugmentedReality */ = {
+			isa = PBXGroup;
+			children = (
+				75009D561F4EAD86002021DC /* Classes */,
+				75009D5E1F4EAD86002021DC /* Resources */,
+			);
+			path = HDAugmentedReality;
+			sourceTree = "<group>";
+		};
+		75009D561F4EAD86002021DC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				75009D571F4EAD86002021DC /* ARAnnotation.swift */,
+				75009D581F4EAD86002021DC /* ARAnnotationView.swift */,
+				75009D591F4EAD86002021DC /* ARConfiguration.swift */,
+				75009D5A1F4EAD86002021DC /* ARTrackingManager.swift */,
+				75009D5B1F4EAD86002021DC /* ARViewController.swift */,
+				75009D5C1F4EAD86002021DC /* Debug */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		75009D5C1F4EAD86002021DC /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				75009D5D1F4EAD86002021DC /* DebugMapViewController.swift */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		75009D5E1F4EAD86002021DC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				75009D5F1F4EAD86002021DC /* DebugMapViewController.xib */,
+				75009D601F4EAD86002021DC /* hdar_close.png */,
+				75009D611F4EAD86002021DC /* hdar_close@2x.png */,
+				75009D621F4EAD86002021DC /* hdar_close@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		75E3EC0B1F3C77540089EB25 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +215,7 @@
 				75009D2F1F4E9D58002021DC /* Place.swift */,
 				75009D331F4E9D65002021DC /* PlacesLoader.swift */,
 				75009D2D1F4E9D4F002021DC /* AnnotationView.swift */,
+				75009D551F4EAD86002021DC /* HDAugmentedReality */,
 				D094F6D21F493CF100210D7C /* Main.storyboard */,
 				75E3EC211F3C77540089EB25 /* Assets.xcassets */,
 				75E3EC231F3C77540089EB25 /* LaunchScreen.storyboard */,
@@ -500,6 +558,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75009D631F4EADCE002021DC /* ARAnnotation.swift in Sources */,
+				75009D641F4EADCE002021DC /* ARAnnotationView.swift in Sources */,
+				75009D651F4EADCE002021DC /* ARConfiguration.swift in Sources */,
+				75009D661F4EADCE002021DC /* ARTrackingManager.swift in Sources */,
+				75009D671F4EADCE002021DC /* ARViewController.swift in Sources */,
+				75009D681F4EADCE002021DC /* DebugMapViewController.swift in Sources */,
 				75DF91571F4CFA3000D31A51 /* NextViewContoller.swift in Sources */,
 				75009D341F4E9D66002021DC /* PlacesLoader.swift in Sources */,
 				75E3EC201F3C77540089EB25 /* ARTwitter.xcdatamodeld in Sources */,
