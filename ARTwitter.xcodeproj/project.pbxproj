@@ -352,7 +352,7 @@
 				TargetAttributes = {
 					75E3EC131F3C77540089EB25 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9R65T9565E;
+						DevelopmentTeam = V8X993MA4F;
 						ProvisioningStyle = Automatic;
 					};
 					75E3EC2A1F3C77550089EB25 = {
@@ -545,11 +545,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ARTwitter/Pods-ARTwitter-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HDAugmentedReality/HDAugmentedReality.framework",
+				"${BUILT_PRODUCTS_DIR}/EAIntroView/EAIntroView.framework",
+				"${BUILT_PRODUCTS_DIR}/EARestrictedScrollView/EARestrictedScrollView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HDAugmentedReality.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EAIntroView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EARestrictedScrollView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -747,11 +749,11 @@
 			baseConfigurationReference = 7B93B45EC5F9453362DD691D /* Pods-ARTwitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9R65T9565E;
+				DEVELOPMENT_TEAM = V8X993MA4F;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter;
+				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -762,11 +764,11 @@
 			baseConfigurationReference = 1100588E733A467D5FAD7F9E /* Pods-ARTwitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9R65T9565E;
+				DEVELOPMENT_TEAM = V8X993MA4F;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter;
+				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

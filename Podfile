@@ -1,7 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-project ‘/Users/masasi/Desktop/hack_u_local/git_hub/hack_u_osaka/ARTwitter.xcodeproj’
+#project ‘/Users/masasi/Desktop/hack_u_local/git_hub/hack_u_osaka/ARTwitter.xcodeproj’
+project '/Users/MASAHARU/Dropbox/ARTwitter/Twitter/ARTwitter.xcworkspace'
 
 target 'ARTwitter' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -13,6 +14,8 @@ target 'ARTwitter' do
 pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
+
+pod 'EAIntroView'
 #pod 'HDAugmentedReality'
 
   target 'ARTwitterTests' do

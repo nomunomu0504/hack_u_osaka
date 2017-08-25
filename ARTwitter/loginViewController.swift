@@ -8,10 +8,11 @@
 
 import UIKit
 import TwitterKit
+import EAIntroView
 
 
 
-class loginViewController: UIViewController {
+class loginViewController: UIViewController , EAIntroDelegate{
     let tweetView = TWTRTweetView()
     
     
@@ -36,6 +37,47 @@ class loginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+                let page1: EAIntroPage = EAIntroPage()
+                page1.title = "ARNet"
+                page1.desc = "ARNetを使って、いつもの旅をさらに楽しく"
+                page1.titlePositionY = 220
+                page1.descPositionY = 220
+                page1.titleColor = UIColor.black
+                page1.descColor = UIColor.black
+                page1.bgImage = UIImage(named: "glass")
+        
+                let page2: EAIntroPage = EAIntroPage()
+                page2.title = "AR"
+                page2.desc = "カメラをかざすと、目の前に情報が広がる"
+                page2.descColor = UIColor.white
+                page2.titleColor = UIColor.white
+                page2.titlePositionY = 220
+                page2.descPositionY = 220
+                page2.bgImage = UIImage(named: "city")
+        
+                let page3: EAIntroPage = EAIntroPage()
+                page3.title = "Twitter or Web"
+                page3.desc = "タップによって、TwitterかWebの\nさらに詳しい情報を"
+                page3.bgImage = UIImage(named: "rain")
+                page3.descColor = UIColor.black
+                page3.titleColor = UIColor.black
+                page3.titlePositionY = 220
+                page3.descPositionY = 220
+        
+        
+                let intro: EAIntroView = EAIntroView(frame: self.view.bounds, andPages: [page1, page2, page3 ])
+                intro.delegate = self
+                intro.show(in: self.view, animateDuration: 0.0)
+        
+        
+        
+//                intro.skipButton.addTarget(self, action: #selector(go), forControlEvents: .TouchUpInside)
+        
+        
 
         
         // Swift
@@ -64,6 +106,9 @@ class loginViewController: UIViewController {
         logInButton.center = self.view.center
         self.view.addSubview(logInButton)
         
+        
+        self.view.addSubview(intro)
+
 
         
         // Do any additional setup after loading the view, typically from a nib.
