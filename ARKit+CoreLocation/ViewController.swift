@@ -152,7 +152,10 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         sceneLocationView.scene.rootNode.addChildNode(node)
         
         
-        let url = Bundle.main.url(forResource: "art.scnassets/animation2/anim", withExtension: "dae")!
+//        let url = Bundle.main.url(forResource: "art.scnassets/animation2/anim", withExtension: "dae")!
+        let url = Bundle.main.url(forResource: "art.scnassets/Yukarin2/Yukarin", withExtension: "dae")!
+
+        
         let modelScene: SCNScene
         do {
             modelScene = try SCNScene(url: url, options: nil)
