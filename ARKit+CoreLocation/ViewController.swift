@@ -10,8 +10,11 @@ import UIKit
 import SceneKit 
 import MapKit
 import CocoaLumberjack
+import ARKit
 
-class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDelegate,ARSCNViewDelegate {
+    
+    
     let sceneLocationView = SceneLocationView()
     
     let mapView = MKMapView()
@@ -40,6 +43,8 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
     
     var node : SCNNode!
     var text : SCNText!
+    
+    var node2 : SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,31 +157,71 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         sceneLocationView.scene.rootNode.addChildNode(node)
         
         
+        
+        
+        
+        
 //        let url = Bundle.main.url(forResource: "art.scnassets/animation2/anim", withExtension: "dae")!
-        let url = Bundle.main.url(forResource: "art.scnassets/Yukarin2/Yukarin", withExtension: "dae")!
-
+//        let url = Bundle.main.url(forResource: "art.scnassets/Yukarin2/Yukarin", withExtension: "dae")!
+//
+//
+//        let modelScene: SCNScene
+//        do {
+//            modelScene = try SCNScene(url: url, options: nil)
+//        } catch {
+//            fatalError()
+//        }
+//
+//        let modelNode = SCNNode()
+//        for childNode in modelScene.rootNode.childNodes {
+//            //childNode.position = SCNVector3Zero
+//            childNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+//            childNode.name = "MMD_model"
+//            modelNode.addChildNode(childNode)
+//        }
+//
+//        modelNode.scale = SCNVector3(x: 2, y: 2, z: 2)
+//
+//        modelNode.position = SCNVector3Make(0, -0.5, -0.2)
+//        modelNode.name = "MMD_Model"
+//
+//        sceneLocationView.scene.rootNode.addChildNode(modelNode)
         
-        let modelScene: SCNScene
-        do {
-            modelScene = try SCNScene(url: url, options: nil)
-        } catch {
-            fatalError()
-        }
+//
+//        // daeファイルのURLを取得
+//        var url2 = Bundle.main.url(forResource: "art.scnassets/Yukarin2/Yukarin", withExtension: "dae")!
+//        // SceneSourceを生成
+//        var sceneSource: SCNSceneSource = SCNSceneSource(url: url2, options: nil)!
+//
+//
+//        let modelScene: SCNScene
+//        do {
+//            modelScene = try SCNScene(url: url2, options: nil)
+//        } catch {
+//            fatalError()
+//        }
+//
+//
+//        // IDの一覧を出力
+////        print(sceneSource.identifiersOfEntriesWithClass(SCNNode.self))
+//        print(sceneSource.identifiersOfEntries(withClass:SCNNode.self))
+//
+//        // IDを指定してモデルデータを取得（※1）
+////        var node2: SCNNode = sceneSource.entryWithIdentifier("FBXASC231FBXASC181FBXASC144FBXASC230FBXASC156FBXASC136FBXASC227FBXASC130FBXASC134FBXASC227FBXASC129FBXASC139FBXASC227FBXASC130FBXASC138_FBXASC231FBXASC180FBXASC148_mesh", withClass: SCNNode.self) as! SCNNode
+//
+//
+//        node2 = SCNNode()
+//        for childNode in modelScene.rootNode.childNodes {
+//            node2.addChildNode(childNode)
+//        }
+//
+//        node2.position = SCNVector3Make(1, -300, -400)
+//        node2.scale = SCNVector3(x: 0.9, y: 0.9, z: 0.9)
+//        sceneLocationView.scene.rootNode.addChildNode(node2)
+//
+//
         
-        let modelNode = SCNNode()
-        for childNode in modelScene.rootNode.childNodes {
-            //childNode.position = SCNVector3Zero
-            childNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
-            childNode.name = "MMD_model"
-            modelNode.addChildNode(childNode)
-        }
         
-        modelNode.scale = SCNVector3(x: 2, y: 2, z: 2)
-        
-        modelNode.position = SCNVector3Make(0, -0.5, -0.2)
-        modelNode.name = "MMD_Model"
-        
-        sceneLocationView.scene.rootNode.addChildNode(modelNode)
         
         
         
@@ -263,11 +308,29 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DDLogDebug("run")
         sceneLocationView.run() //ここでlcation view のnodeのサイズとか色々変更している
+        
+
+        // A2 configuration ARWorldTrackingSessionConfiguration
+        if ARWorldTrackingSessionConfiguration.isSupported {
+            let configuration = ARWorldTrackingSessionConfiguration()
+            configuration.planeDetection = .horizontal
+            configuration.isLightEstimationEnabled = true
+            sceneLocationView.session.run(configuration)
+        } else {
+            sceneLocationView.session.run(ARSessionConfiguration())
+        }
+
     }
+    
+
+    
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -275,7 +338,18 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
         DDLogDebug("pause")
         // Pause the view's session
         sceneLocationView.pause()
+        
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -299,6 +373,8 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
             y: self.view.frame.size.height / 2,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height / 2)
+                
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -534,6 +610,8 @@ class ViewController: UIViewController, MKMapViewDelegate, SceneLocationViewDele
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
         
     }
+    
+
 }
 
 extension DispatchQueue {
@@ -554,6 +632,86 @@ extension UIView {
         return recursiveSubviews
     }
 
+}
+
+
+
+
+
+extension SceneLocationView  {
+    
+
+    
+    
+    
+
+
+    
+    // A11 add ARSCNViewDelegate
+    public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        
+        let floor = Floor(anchor: planeAnchor)
+        node.addChildNode(floor)
+        self.floors.append(floor)
+        
+        
+        
+        
+                // daeファイルのURLを取得
+                var url2 = Bundle.main.url(forResource: "art.scnassets/Yukarin2/Yukarin", withExtension: "dae")!
+                // SceneSourceを生成
+                var sceneSource: SCNSceneSource = SCNSceneSource(url: url2, options: nil)!
+        
+        
+                let modelScene: SCNScene
+                do {
+                    modelScene = try SCNScene(url: url2, options: nil)
+                } catch {
+                    fatalError()
+                }
+        
+        
+                // IDの一覧を出力
+        //        print(sceneSource.identifiersOfEntriesWithClass(SCNNode.self))
+                print(sceneSource.identifiersOfEntries(withClass:SCNNode.self))
+        
+                // IDを指定してモデルデータを取得（※1）
+        //        var node2: SCNNode = sceneSource.entryWithIdentifier("FBXASC231FBXASC181FBXASC144FBXASC230FBXASC156FBXASC136FBXASC227FBXASC130FBXASC134FBXASC227FBXASC129FBXASC139FBXASC227FBXASC130FBXASC138_FBXASC231FBXASC180FBXASC148_mesh", withClass: SCNNode.self) as! SCNNode
+        
+        
+                let node2 = SCNNode()
+                for childNode in modelScene.rootNode.childNodes {
+                    node2.addChildNode(childNode)
+                }
+        
+                node2.position = SCNVector3Make(1, -300, -400)
+                node2.scale = SCNVector3(x: 0.9, y: 0.9, z: 0.9)
+                node.addChildNode(node2)
+        
+        
+        
+        
+        
+        
+    }
+    
+    public func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        for floor in self.floors {
+            if floor.anchor.identifier == anchor.identifier,
+                let planeAnchor = anchor as? ARPlaneAnchor {
+                floor.update(anchor: planeAnchor)
+            }
+        }
+    }
+    
+    public func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        for (index, floor) in floors.enumerated().reversed() {
+            if floor.anchor.identifier == anchor.identifier {
+                self.floors.remove(at: index)
+            }
+        }
+    }
 }
 
 

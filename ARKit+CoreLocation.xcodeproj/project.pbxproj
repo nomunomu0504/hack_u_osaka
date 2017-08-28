@@ -27,6 +27,7 @@
 		75654B801F45FF5A00F32266 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 75654B7F1F45FF5900F32266 /* art.scnassets */; };
 		75C7F61C1F434BB3008A6732 /* CreateSampleObjectAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7F61B1F434BB3008A6732 /* CreateSampleObjectAR.swift */; };
 		75C7F61E1F4361D0008A6732 /* SceneLocationView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7F61D1F4361D0008A6732 /* SceneLocationView+extension.swift */; };
+		75E5401F1F54180000499277 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E5401E1F54180000499277 /* Floor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		75654B7F1F45FF5900F32266 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		75C7F61B1F434BB3008A6732 /* CreateSampleObjectAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSampleObjectAR.swift; sourceTree = "<group>"; };
 		75C7F61D1F4361D0008A6732 /* SceneLocationView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneLocationView+extension.swift"; sourceTree = "<group>"; };
+		75E5401E1F54180000499277 /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		A967016A4C9D5DA8BF8AE438 /* Pods-ARKit+CoreLocation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKit+CoreLocation.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARKit+CoreLocation/Pods-ARKit+CoreLocation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 				49A3FBF31F099A4A00AA59C8 /* Source */,
 				49A3FBDB1F09988100AA59C8 /* AppDelegate.swift */,
 				49A3FBDF1F09988100AA59C8 /* ViewController.swift */,
+				75E5401E1F54180000499277 /* Floor.swift */,
 				75654B7F1F45FF5900F32266 /* art.scnassets */,
 				75C7F61D1F4361D0008A6732 /* SceneLocationView+extension.swift */,
 				75C7F61B1F434BB3008A6732 /* CreateSampleObjectAR.swift */,
@@ -265,6 +268,7 @@
 				49099E391F24BAE5007B76FD /* SCNVector3+Extensions.swift in Sources */,
 				49A3FBF71F099C8100AA59C8 /* SceneLocationView.swift in Sources */,
 				75C7F61E1F4361D0008A6732 /* SceneLocationView+extension.swift in Sources */,
+				75E5401F1F54180000499277 /* Floor.swift in Sources */,
 				49A3FC031F09BADB00AA59C8 /* FloatingPoint+Radians.swift in Sources */,
 				49A3FBFF1F09B1D200AA59C8 /* LocationNode.swift in Sources */,
 				75C7F61C1F434BB3008A6732 /* CreateSampleObjectAR.swift in Sources */,

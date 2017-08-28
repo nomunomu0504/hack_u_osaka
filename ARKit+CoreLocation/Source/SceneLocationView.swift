@@ -38,6 +38,12 @@ public enum LocationEstimateMethod {
 
 //Should conform to delegate here, add in future commit
 public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
+    
+    // A10 save floors
+    var floors: [Floor] = []
+    
+
+    
     ///The limit to the scene, in terms of what data is considered reasonably accurate.
     ///Measured in meters.
     private static let sceneLimit = 100.0
@@ -84,6 +90,11 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     ///thus affecting your alterations.
     ///The initial value of this property is respected.
     public var orientToTrueNorth = true
+    
+    
+    
+    
+    
     
     //MARK: Setup
     public convenience init() {
@@ -491,6 +502,12 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
             }
         }
     }
+    
+    
+    
+    
+    
+    
     
     public func sessionWasInterrupted(_ session: ARSession) {
         print("session was interrupted")
