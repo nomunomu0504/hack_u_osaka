@@ -352,7 +352,7 @@
 				TargetAttributes = {
 					75E3EC131F3C77540089EB25 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = V8X993MA4F;
+						DevelopmentTeam = 62ZE3Y948A;
 						ProvisioningStyle = Automatic;
 					};
 					75E3EC2A1F3C77550089EB25 = {
@@ -749,11 +749,11 @@
 			baseConfigurationReference = 7B93B45EC5F9453362DD691D /* Pods-ARTwitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V8X993MA4F;
+				DEVELOPMENT_TEAM = 62ZE3Y948A;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter2;
+				PRODUCT_BUNDLE_IDENTIFIER = arsjam.ARTwitter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -764,11 +764,11 @@
 			baseConfigurationReference = 1100588E733A467D5FAD7F9E /* Pods-ARTwitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = V8X993MA4F;
+				DEVELOPMENT_TEAM = 62ZE3Y948A;
 				INFOPLIST_FILE = ARTwitter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = oremushi.ARTwitter2;
+				PRODUCT_BUNDLE_IDENTIFIER = arsjam.ARTwitter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

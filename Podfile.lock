@@ -23,7 +23,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
-  - TwitterKit
+  - TwitterKit (~> 2.8.0)
 
 SPEC CHECKSUMS:
   EAIntroView: 3494b7bbd1212e3a4f7e8d16194a1b00e7b9abb2
@@ -35,6 +35,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: eec529a22a545c446d1f6e079f2568167b4aefe2
+PODFILE CHECKSUM: cd5beb6e0d39002efd66ee4c14f43abf061807fa
 
 COCOAPODS: 1.3.1
